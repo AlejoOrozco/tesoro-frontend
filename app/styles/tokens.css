@@ -1,0 +1,288 @@
+/*
+ * GENERATED FILE — DO NOT EDIT BY HAND.
+ * Regenerate with `pnpm tokens` (scripts/generate-tokens.ts).
+ * Recipe: docs/design/color-palette.md + docs/README.md shared tokens.
+ *
+ * Components use ROLE utilities, never raw steps or ad hoc values:
+ *   bg-background · bg-surface · bg-secondary · bg-primary · bg-chrome
+ *   text-foreground · text-muted · text-primary-foreground · text-chrome-foreground
+ *   border-border · border-secondary-border
+ *   hover:bg-primary-hover · active:bg-primary-active
+ *   rounded-sm (4px) · rounded-md (8px) · rounded-lg (16px) · rounded-full (pill)
+ *   duration-micro (150ms) · duration-standard (250ms) · duration-confirm (300ms)
+ * Scale steps (bg-neutral-500, text-error-700, …) exist for the token review
+ * page and rare chrome-adjacent cases only.
+ *
+ * Spacing keeps Tailwind's default --spacing (0.25rem). Allowed steps only:
+ *   p-1=4px p-2=8px p-3=12px p-4=16px p-6=24px p-8=32px p-12=48px p-16=64px
+ * Non-utility CSS uses var(--space-4) … var(--space-64).
+ *
+ * Theming: :root = light, [data-theme="dark"] = dark; when data-theme is
+ * unset the OS preference applies. Nested [data-theme] panels re-theme their
+ * subtree (used by /dev/tokens).
+ */
+
+:root {
+  /* neutral scale */
+  --neutral-50: oklch(0.97 0.0023 264.89);
+  --neutral-100: oklch(0.93 0.0038 264.89);
+  --neutral-200: oklch(0.86 0.0068 264.89);
+  --neutral-300: oklch(0.76 0.0105 264.89);
+  --neutral-400: oklch(0.64 0.0135 264.89);
+  --neutral-500: oklch(0.53 0.015 264.89);
+  --neutral-600: oklch(0.45 0.0143 264.89);
+  --neutral-700: oklch(0.37 0.0127 264.89);
+  --neutral-800: oklch(0.29 0.0105 264.89);
+  --neutral-900: oklch(0.21 0.0083 264.89);
+  --neutral-950: oklch(0.14 0.006 264.89);
+  /* navy scale */
+  --navy-50: oklch(0.97 0.014 264.89);
+  --navy-100: oklch(0.93 0.0295 264.89);
+  --navy-200: oklch(0.86 0.0531 264.89);
+  --navy-300: oklch(0.76 0.0826 264.89);
+  --navy-400: oklch(0.64 0.1063 264.89);
+  --navy-500: oklch(0.53 0.1181 264.89);
+  --navy-600: oklch(0.45 0.1122 264.89);
+  --navy-700: oklch(0.37 0.1004 264.89);
+  --navy-800: oklch(0.29 0.0826 264.89);
+  --navy-900: oklch(0.2188 0.0649 264.89);
+  --navy-950: oklch(0.14 0.0472 264.89);
+  /* gold scale */
+  --gold-50: oklch(0.97 0.0357 88.45);
+  --gold-100: oklch(0.93 0.0658 88.45);
+  --gold-200: oklch(0.8574 0.1185 88.45);
+  --gold-300: oklch(0.76 0.1553 88.45);
+  --gold-400: oklch(0.64 0.1308 88.45);
+  --gold-500: oklch(0.53 0.1083 88.45);
+  --gold-600: oklch(0.45 0.0919 88.45);
+  --gold-700: oklch(0.37 0.0756 88.45);
+  --gold-800: oklch(0.29 0.0592 88.45);
+  --gold-900: oklch(0.21 0.0429 88.45);
+  --gold-950: oklch(0.14 0.0286 88.45);
+  /* success scale */
+  --success-50: oklch(0.97 0.0162 145);
+  --success-100: oklch(0.93 0.0271 145);
+  --success-200: oklch(0.86 0.0487 145);
+  --success-300: oklch(0.76 0.0758 145);
+  --success-400: oklch(0.64 0.0975 145);
+  --success-500: oklch(0.53 0.1083 145);
+  --success-600: oklch(0.45 0.1029 145);
+  --success-700: oklch(0.37 0.0921 145);
+  --success-800: oklch(0.29 0.0758 145);
+  --success-900: oklch(0.21 0.0596 145);
+  --success-950: oklch(0.14 0.0433 145);
+  /* warning scale */
+  --warning-50: oklch(0.97 0.0162 85);
+  --warning-100: oklch(0.93 0.0271 85);
+  --warning-200: oklch(0.86 0.0487 85);
+  --warning-300: oklch(0.76 0.0758 85);
+  --warning-400: oklch(0.64 0.0975 85);
+  --warning-500: oklch(0.53 0.1083 85);
+  --warning-600: oklch(0.45 0.0922 85);
+  --warning-700: oklch(0.37 0.0758 85);
+  --warning-800: oklch(0.29 0.0594 85);
+  --warning-900: oklch(0.21 0.043 85);
+  --warning-950: oklch(0.14 0.0287 85);
+  /* error scale */
+  --error-50: oklch(0.97 0.0147 27);
+  --error-100: oklch(0.93 0.0271 27);
+  --error-200: oklch(0.86 0.0487 27);
+  --error-300: oklch(0.76 0.0758 27);
+  --error-400: oklch(0.64 0.0975 27);
+  --error-500: oklch(0.53 0.1083 27);
+  --error-600: oklch(0.45 0.1029 27);
+  --error-700: oklch(0.37 0.0921 27);
+  --error-800: oklch(0.29 0.0758 27);
+  --error-900: oklch(0.21 0.0596 27);
+  --error-950: oklch(0.14 0.0433 27);
+  /* info scale */
+  --info-50: oklch(0.97 0.0159 240);
+  --info-100: oklch(0.93 0.0271 240);
+  --info-200: oklch(0.86 0.0487 240);
+  --info-300: oklch(0.76 0.0758 240);
+  --info-400: oklch(0.64 0.0975 240);
+  --info-500: oklch(0.53 0.1083 240);
+  --info-600: oklch(0.45 0.1029 240);
+  --info-700: oklch(0.37 0.0847 240);
+  --info-800: oklch(0.29 0.0664 240);
+  --info-900: oklch(0.21 0.0481 240);
+  --info-950: oklch(0.14 0.0321 240);
+  /* spacing (px) — docs/README.md shared tokens */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+  /* motion */
+  --motion-micro: 150ms;
+  --motion-standard: 250ms;
+  --motion-confirm: 300ms;
+}
+
+/* Role tokens — light (default) */
+:root,
+[data-theme="light"] {
+  --background: var(--neutral-50);
+  --surface: var(--neutral-100);
+  --border: var(--neutral-400);
+  --text-muted: var(--neutral-600);
+  --text-primary: var(--neutral-900);
+  --secondary-surface: var(--gold-100);
+  --secondary-border: var(--gold-300);
+  --action-primary: var(--gold-500);
+  --action-primary-hover: var(--gold-600);
+  --action-primary-active: var(--gold-700);
+  --action-primary-text: var(--neutral-50);
+  --chrome: var(--navy-900);
+  --chrome-text: var(--neutral-50);
+  color-scheme: light;
+}
+
+/* Role tokens — dark */
+[data-theme="dark"] {
+  --background: var(--neutral-900);
+  --surface: var(--neutral-800);
+  --border: var(--neutral-500);
+  --text-muted: var(--neutral-300);
+  --text-primary: var(--neutral-50);
+  --secondary-surface: var(--gold-800);
+  --secondary-border: var(--gold-700);
+  --action-primary: var(--gold-400);
+  --action-primary-hover: var(--gold-300);
+  --action-primary-active: var(--gold-200);
+  --action-primary-text: var(--neutral-900);
+  --chrome: var(--navy-900);
+  --chrome-text: var(--neutral-50);
+  color-scheme: dark;
+}
+
+/* OS preference applies only while data-theme is unset (toggle lands in 1.4) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --background: var(--neutral-900);
+    --surface: var(--neutral-800);
+    --border: var(--neutral-500);
+    --text-muted: var(--neutral-300);
+    --text-primary: var(--neutral-50);
+    --secondary-surface: var(--gold-800);
+    --secondary-border: var(--gold-700);
+    --action-primary: var(--gold-400);
+    --action-primary-hover: var(--gold-300);
+    --action-primary-active: var(--gold-200);
+    --action-primary-text: var(--neutral-900);
+    --chrome: var(--navy-900);
+    --chrome-text: var(--neutral-50);
+    color-scheme: dark;
+  }
+}
+
+/* Tailwind theme — wipe the default palette and radius so only tokens exist */
+@theme {
+  --color-*: initial;
+  --radius-*: initial;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+}
+
+/* Utilities reference the role/scale variables — one source of truth */
+@theme inline {
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --transition-duration-micro: var(--motion-micro);
+  --transition-duration-standard: var(--motion-standard);
+  --transition-duration-confirm: var(--motion-confirm);
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-muted: var(--text-muted);
+  --color-foreground: var(--text-primary);
+  --color-secondary: var(--secondary-surface);
+  --color-secondary-border: var(--secondary-border);
+  --color-primary: var(--action-primary);
+  --color-primary-hover: var(--action-primary-hover);
+  --color-primary-active: var(--action-primary-active);
+  --color-primary-foreground: var(--action-primary-text);
+  --color-chrome: var(--chrome);
+  --color-chrome-foreground: var(--chrome-text);
+  --color-neutral-50: var(--neutral-50);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-900: var(--neutral-900);
+  --color-neutral-950: var(--neutral-950);
+  --color-navy-50: var(--navy-50);
+  --color-navy-100: var(--navy-100);
+  --color-navy-200: var(--navy-200);
+  --color-navy-300: var(--navy-300);
+  --color-navy-400: var(--navy-400);
+  --color-navy-500: var(--navy-500);
+  --color-navy-600: var(--navy-600);
+  --color-navy-700: var(--navy-700);
+  --color-navy-800: var(--navy-800);
+  --color-navy-900: var(--navy-900);
+  --color-navy-950: var(--navy-950);
+  --color-gold-50: var(--gold-50);
+  --color-gold-100: var(--gold-100);
+  --color-gold-200: var(--gold-200);
+  --color-gold-300: var(--gold-300);
+  --color-gold-400: var(--gold-400);
+  --color-gold-500: var(--gold-500);
+  --color-gold-600: var(--gold-600);
+  --color-gold-700: var(--gold-700);
+  --color-gold-800: var(--gold-800);
+  --color-gold-900: var(--gold-900);
+  --color-gold-950: var(--gold-950);
+  --color-success-50: var(--success-50);
+  --color-success-100: var(--success-100);
+  --color-success-200: var(--success-200);
+  --color-success-300: var(--success-300);
+  --color-success-400: var(--success-400);
+  --color-success-500: var(--success-500);
+  --color-success-600: var(--success-600);
+  --color-success-700: var(--success-700);
+  --color-success-800: var(--success-800);
+  --color-success-900: var(--success-900);
+  --color-success-950: var(--success-950);
+  --color-warning-50: var(--warning-50);
+  --color-warning-100: var(--warning-100);
+  --color-warning-200: var(--warning-200);
+  --color-warning-300: var(--warning-300);
+  --color-warning-400: var(--warning-400);
+  --color-warning-500: var(--warning-500);
+  --color-warning-600: var(--warning-600);
+  --color-warning-700: var(--warning-700);
+  --color-warning-800: var(--warning-800);
+  --color-warning-900: var(--warning-900);
+  --color-warning-950: var(--warning-950);
+  --color-error-50: var(--error-50);
+  --color-error-100: var(--error-100);
+  --color-error-200: var(--error-200);
+  --color-error-300: var(--error-300);
+  --color-error-400: var(--error-400);
+  --color-error-500: var(--error-500);
+  --color-error-600: var(--error-600);
+  --color-error-700: var(--error-700);
+  --color-error-800: var(--error-800);
+  --color-error-900: var(--error-900);
+  --color-error-950: var(--error-950);
+  --color-info-50: var(--info-50);
+  --color-info-100: var(--info-100);
+  --color-info-200: var(--info-200);
+  --color-info-300: var(--info-300);
+  --color-info-400: var(--info-400);
+  --color-info-500: var(--info-500);
+  --color-info-600: var(--info-600);
+  --color-info-700: var(--info-700);
+  --color-info-800: var(--info-800);
+  --color-info-900: var(--info-900);
+  --color-info-950: var(--info-950);
+}
