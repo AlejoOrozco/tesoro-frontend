@@ -26,7 +26,8 @@ const SIZE_CLASSES: Record<ButtonSize, string> = {
   lg: "h-14 px-6 text-base",
 };
 
-function buttonClasses(variant: ButtonVariant, size: ButtonSize, className?: string): string {
+/** Exported for plain `<a>` CTAs (tel/mailto/WhatsApp) that can't use next/link. */
+export function buttonClasses(variant: ButtonVariant, size: ButtonSize, className?: string): string {
   return [BASE_CLASSES, VARIANT_CLASSES[variant], SIZE_CLASSES[size], className].filter(Boolean).join(" ");
 }
 
