@@ -31,7 +31,7 @@ app/
 └── (shop)/                 Reserved. Catalog/cart land here later without a rewrite.
 assets/brand/               Logo and favicon source files. Import via `assets/brand.ts`.
 lib/                        Shared non-UI code (contact constants, landmarks, theme, later API clients).
-components/                 Shared UI (skip-to-content, theme init script; more primitives in Stage 2).
+components/                 Shared UI: button, container/section, typography, empty-state, icons, skip-to-content, theme init script.
 scripts/                    Build-time tooling: generate-tokens.ts (OKLCH scales + WCAG gate).
 docs/                       Product plan, infrastructure, and UI pattern docs.
 ```
