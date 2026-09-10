@@ -20,7 +20,7 @@ export function SiteHeader(): ReactElement {
           href="/"
           className="rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
-          <BrandLockup priority />
+          <BrandLockup preload />
         </Link>
 
         <div className="flex items-center gap-1">

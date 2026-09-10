@@ -133,3 +133,15 @@ export function MapPinIcon(props: IconProps): ReactElement {
     </svg>
   );
 }
+
+/** Globe — import-on-demand / bringing products from abroad. */
+export function GlobeIcon(props: IconProps): ReactElement {
+  return (
+    <svg {...baseProps(props)}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18" />
+      <path d="M12 3a15 15 0 0 1 0 18" />
+      <path d="M12 3a15 15 0 0 0 0 18" />
+    </svg>
+  );
+}

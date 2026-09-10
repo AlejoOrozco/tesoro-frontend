@@ -38,7 +38,7 @@ export function SucursalesSection(): ReactElement {
       <Text tone="muted" className="mt-2 max-w-2xl">
         Visítanos en nuestros puntos de venta. Pronto publicaremos las direcciones y los horarios completos.
       </Text>
-      <ul className="mt-8 grid gap-4 sm:grid-cols-2">
+      <ul className={["mt-8 grid gap-4", SUCURSALES.length > 1 ? "sm:grid-cols-2" : "max-w-lg"].join(" ")}>
         {SUCURSALES.map((sucursal) => (
           <SucursalCard key={sucursal.id} sucursal={sucursal} />
         ))}

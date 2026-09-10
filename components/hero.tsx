@@ -2,9 +2,9 @@ import Image from "next/image";
 import type { ReactElement } from "react";
 
 import { brandAssets } from "@/assets/brand";
-import { ButtonLink } from "@/components/button";
 import { Container } from "@/components/container";
-import { Heading } from "@/components/typography";
+import { HeroIntro } from "@/components/hero-intro";
+import { HeroTrust } from "@/components/hero-trust";
 
 /**
  * Navy band in both themes (chrome), per the approved mocks. The visual is
@@ -14,28 +14,18 @@ import { Heading } from "@/components/typography";
 export function Hero(): ReactElement {
   return (
     <section className="bg-chrome text-chrome-foreground">
-      <Container className="grid items-center gap-8 py-12 sm:grid-cols-[1fr_auto] sm:py-16">
-        <div className="flex max-w-xl flex-col items-start gap-6">
-          <Heading level={1}>Tecnología y accesorios, sin fronteras</Heading>
-          <p className="text-lg leading-relaxed text-neutral-300">
-            Productos originales, garantía real y envíos a todo el país. En Tesoro Global te conectamos con lo último
-            en tecnología.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <ButtonLink href="/contact" size="lg">
-              Contáctanos
-            </ButtonLink>
-            <ButtonLink href="#services" variant="secondary" size="lg">
-              Nuestros servicios
-            </ButtonLink>
-          </div>
+      <Container className="py-12 sm:py-16">
+        <div className="grid items-center gap-8 sm:grid-cols-2">
+          <HeroIntro />
+          <Image
+            src={brandAssets.logoGoldNoBackground.image}
+            alt=""
+            preload
+            sizes="(min-width: 640px) 18rem, 14rem"
+            className="mx-auto h-auto w-56 sm:w-72"
+          />
         </div>
-        <Image
-          src={brandAssets.logoGoldNoBackground.image}
-          alt=""
-          priority
-          className="mx-auto h-auto w-56 sm:w-72"
-        />
+        <HeroTrust />
       </Container>
     </section>
   );

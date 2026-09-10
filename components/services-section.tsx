@@ -1,12 +1,10 @@
-import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactElement } from "react";
 
-import { buttonClasses } from "@/components/button";
+import { ContactCta } from "@/components/contact-cta";
 import { ChatIcon, ShieldCheckIcon, SmartphoneIcon, TruckIcon } from "@/components/icons";
 import { Section } from "@/components/section";
 import { Heading, Text } from "@/components/typography";
-import { whatsappUrl } from "@/lib/contact";
-import { SERVICES, type Service, type ServiceId } from "@/lib/services";
+import { SERVICES, type ServiceId } from "@/lib/services";
 
 type IconComponent = (props: ComponentPropsWithoutRef<"svg">) => ReactElement;
 
@@ -16,24 +14,6 @@ const SERVICE_ICONS: Record<ServiceId, IconComponent> = {
   warranty: ShieldCheckIcon,
   advice: ChatIcon,
 };
-
-/** WhatsApp with a prefilled message when configured; /contact otherwise. */
-function ServiceCta({ service }: { readonly service: Service }): ReactElement {
-  const whatsapp = whatsappUrl(service.whatsappMessage);
-  const classes = buttonClasses("secondary", "md");
-  if (whatsapp === null) {
-    return (
-      <Link href="/contact" className={classes}>
-        Contáctanos
-      </Link>
-    );
-  }
-  return (
-    <a href={whatsapp} target="_blank" rel="noreferrer" className={classes}>
-      Contáctanos por WhatsApp
-    </a>
-  );
-}
 
 export function ServicesSection(): ReactElement {
   return (
@@ -54,7 +34,7 @@ export function ServicesSection(): ReactElement {
               <Text tone="muted" className="flex-1">
                 {service.description}
               </Text>
-              <ServiceCta service={service} />
+              <ContactCta message={service.whatsappMessage} whatsappLabel="Contáctanos por WhatsApp" />
             </li>
           );
         })}
