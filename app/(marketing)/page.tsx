@@ -2,16 +2,16 @@ import type { ReactElement } from "react";
 
 import { Hero } from "@/components/hero";
 import { ImportCallout } from "@/components/import-callout";
-import { ServicesSection } from "@/components/services-section";
-import { SucursalesSection } from "@/components/sucursales-section";
+import { NewsletterSignup } from "@/components/newsletter-signup";
+import { ProductsSection } from "@/components/products-section";
 
 export default function HomePage(): ReactElement {
   return (
     <>
       <Hero />
+      <ProductsSection />
       <ImportCallout />
-      <ServicesSection />
-      <SucursalesSection />
+      <NewsletterSignup />
     </>
   );
 }

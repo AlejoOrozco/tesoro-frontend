@@ -4,8 +4,8 @@ type HeadingLevel = 1 | 2 | 3;
 
 const HEADING_CLASSES: Record<HeadingLevel, string> = {
   1: "text-4xl font-bold tracking-tight text-balance sm:text-5xl",
-  2: "text-2xl font-semibold tracking-tight sm:text-3xl",
-  3: "text-lg font-semibold sm:text-xl",
+  2: "text-2xl font-bold tracking-tight sm:text-3xl",
+  3: "text-lg font-bold sm:text-xl",
 };
 
 type HeadingProps = { readonly level: HeadingLevel } & ComponentPropsWithoutRef<"h1">;

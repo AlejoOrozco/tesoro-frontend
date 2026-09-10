@@ -21,7 +21,7 @@ Copy `.env.example` to `.env.local` for local public config. Never commit `.env*
 
 ```
 app/
-├── layout.tsx              Root document (html/body) + Outfit via next/font.
+├── layout.tsx              Root document (html/body) + Montserrat (500/700) via next/font.
 ├── globals.css             Imports Tailwind and the generated tokens.
 ├── styles/tokens.css       GENERATED design tokens — never edit; run `pnpm tokens`.
 ├── icon.png                Favicon (navy, no background).
@@ -30,6 +30,9 @@ app/
 │   └── page.tsx            /  (landing)
 └── (shop)/                 Reserved. Catalog/cart land here later without a rewrite.
 assets/brand/               Logo and favicon source files. Import via `assets/brand.ts`.
+assets/hero/                Hero cut-outs the app imports (`assets/hero.ts`).
+assets/products/            Product photos the app imports (`assets/products.ts`).
+media/                      Drop folder for new imagery — left in place; files are copied into assets/.
 lib/                        Shared non-UI code (contact constants, landmarks, theme, later API clients).
 components/                 Shared UI: button, container/section, typography, empty-state, icons, skip-to-content, theme init script.
 scripts/                    Build-time tooling: generate-tokens.ts (OKLCH scales + WCAG gate).

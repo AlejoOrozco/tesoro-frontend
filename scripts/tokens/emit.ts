@@ -106,7 +106,7 @@ function inlineTheme(): string {
   const lines: string[] = [
     "/* Utilities reference the role/scale variables — one source of truth */",
     "@theme inline {",
-    "  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;",
+    "  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;",
     ...Object.keys(MOTION_MS).map((name) => `  --transition-duration-${name}: var(--motion-${name});`),
     ...ROLE_COLOR_MAP.map(([token, role]) => `  ${token}: var(${role});`),
   ];

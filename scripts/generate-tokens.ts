@@ -42,6 +42,7 @@ function main(): void {
   console.log(`tokens: ${gated} contrast gates passed (light + dark)`);
   console.log(`  navy seed ${all.seeds.navy.oklch} → anchor step ${all.seeds.navy.anchorStep}`);
   console.log(`  gold seed ${all.seeds.gold.oklch} → anchor step ${all.seeds.gold.anchorStep}`);
+  console.log(`  gray seed ${all.seeds.gray.oklch} → anchor step ${all.seeds.gray.anchorStep} (neutral scale)`);
   for (const deviation of resolved.deviations) console.log(`  deviation: ${deviation}`);
   console.log(`  wrote ${path.relative(process.cwd(), CSS_PATH)}`);
 }

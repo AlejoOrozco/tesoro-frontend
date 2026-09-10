@@ -14,17 +14,19 @@ export const LIGHTNESS = [0.97, 0.93, 0.86, 0.76, 0.64, 0.53, 0.45, 0.37, 0.29, 
 export const CHROMA_FACTOR = [0.15, 0.25, 0.45, 0.7, 0.9, 1.0, 0.95, 0.85, 0.7, 0.55, 0.4] as const;
 
 /**
- * Brand seeds, in priority order (extracted from the brand lockups).
- * Navy is the ink of logo-navy.jpg / the field of logo-gold.jpg.
- * Gold is the field of logo-navy.jpg.
+ * Official brand sheet (gold / navy / gray). These are seeds, not the whole
+ * UI: each one expands to an 11-step OKLCH scale (docs/design/color-palette.md).
+ *
+ * Role mapping (not left-to-right on the sheet):
+ *   gray  → neutrals (60% — backgrounds, surfaces, body text)
+ *   gold  → secondary + accent (30/10 — supporting UI and primary actions)
+ *   navy  → chrome (header/footer) plus the navy scale for chrome-adjacent steps
  */
 export const SEEDS = {
-  navy: "#0B1838",
-  gold: "#F0CC70",
+  gold: "#EFCC70",
+  navy: "#0B1938",
+  gray: "#CCCCCC",
 } as const;
-
-/** §3 — neutral scale chroma: same hue as priority-1 seed, near-achromatic. */
-export const NEUTRAL_CHROMA = 0.015;
 
 /** §4 — conventional hues for semantic scales (chroma matched to the accent). */
 export const SEMANTIC_HUES = {

@@ -4,7 +4,6 @@ import type { Oklch } from "culori";
 import {
   CHROMA_FACTOR,
   LIGHTNESS,
-  NEUTRAL_CHROMA,
   SEEDS,
   SEMANTIC_HUES,
   STEPS,
@@ -35,7 +34,7 @@ export interface SeedInfo {
 
 export interface TokenScales {
   readonly scales: Readonly<Record<ScaleName, Scale>>;
-  readonly seeds: Readonly<Record<"navy" | "gold", SeedInfo>>;
+  readonly seeds: Readonly<Record<"navy" | "gold" | "gray", SeedInfo>>;
 }
 
 const round = (value: number, digits: number): number => {
@@ -109,11 +108,6 @@ export function buildBrandScale(seedHex: string): { scale: Scale; seed: SeedInfo
   };
 }
 
-/** Near-achromatic scale at the priority-1 hue (§3, dominant → neutrals). */
-export function buildNeutralScale(hue: number): Scale {
-  return buildSteps((i) => makeStep(LIGHTNESS[i], NEUTRAL_CHROMA * CHROMA_FACTOR[i], hue));
-}
-
 /** Semantic scale at a conventional hue, chroma matched to the accent (§4). */
 export function buildSemanticScale(hue: number, accentChroma: number): Scale {
   return buildSteps((i) => makeStep(LIGHTNESS[i], accentChroma * CHROMA_FACTOR[i], hue));
@@ -122,7 +116,7 @@ export function buildSemanticScale(hue: number, accentChroma: number): Scale {
 export function buildAllScales(): TokenScales {
   const navy = buildBrandScale(SEEDS.navy);
   const gold = buildBrandScale(SEEDS.gold);
-  const navyHue = parseSeed(SEEDS.navy).h ?? 0;
+  const gray = buildBrandScale(SEEDS.gray);
   // "Accent's own chroma level" = the gold scale's mid-step chroma after
   // gamut clamping, so semantics sit at the same perceived saturation.
   const accentChroma = gold.scale[500].c;
@@ -136,11 +130,13 @@ export function buildAllScales(): TokenScales {
 
   return {
     scales: {
-      neutral: buildNeutralScale(navyHue),
+      // Official gray ramp: #CCCCCC lands on its lightness-matched step.
+      // Remaining steps follow the recipe so the 60% UI isn't a flat hex.
+      neutral: gray.scale,
       navy: navy.scale,
       gold: gold.scale,
       ...semantics,
     },
-    seeds: { navy: navy.seed, gold: gold.seed },
+    seeds: { navy: navy.seed, gold: gold.seed, gray: gray.seed },
   };
 }

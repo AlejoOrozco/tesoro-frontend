@@ -124,16 +124,6 @@ export function ChatIcon(props: IconProps): ReactElement {
   );
 }
 
-/** Map pin — physical store locations (sucursales). */
-export function MapPinIcon(props: IconProps): ReactElement {
-  return (
-    <svg {...baseProps(props)}>
-      <path d="M20 10c0 4.99-5.54 10.19-7.4 11.8a1 1 0 0 1-1.2 0C9.54 20.19 4 14.99 4 10a8 8 0 0 1 16 0" />
-      <circle cx="12" cy="10" r="3" />
-    </svg>
-  );
-}
-
 /** Globe — import-on-demand / bringing products from abroad. */
 export function GlobeIcon(props: IconProps): ReactElement {
   return (
@@ -142,6 +132,26 @@ export function GlobeIcon(props: IconProps): ReactElement {
       <path d="M3 12h18" />
       <path d="M12 3a15 15 0 0 1 0 18" />
       <path d="M12 3a15 15 0 0 0 0 18" />
+    </svg>
+  );
+}
+
+/** Envelope — newsletter / email. */
+export function MailIcon(props: IconProps): ReactElement {
+  return (
+    <svg {...baseProps(props)}>
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m3 7 9 6 9-6" />
+    </svg>
+  );
+}
+
+/** Card — Wompi / secure payment. */
+export function CreditCardIcon(props: IconProps): ReactElement {
+  return (
+    <svg {...baseProps(props)}>
+      <rect x="2" y="5" width="20" height="14" rx="2" />
+      <path d="M2 10h20" />
     </svg>
   );
 }

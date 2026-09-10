@@ -24,41 +24,41 @@
 
 :root {
   /* neutral scale */
-  --neutral-50: oklch(0.97 0.0023 264.89);
-  --neutral-100: oklch(0.93 0.0038 264.89);
-  --neutral-200: oklch(0.86 0.0068 264.89);
-  --neutral-300: oklch(0.76 0.0105 264.89);
-  --neutral-400: oklch(0.64 0.0135 264.89);
-  --neutral-500: oklch(0.53 0.015 264.89);
-  --neutral-600: oklch(0.45 0.0143 264.89);
-  --neutral-700: oklch(0.37 0.0127 264.89);
-  --neutral-800: oklch(0.29 0.0105 264.89);
-  --neutral-900: oklch(0.21 0.0083 264.89);
-  --neutral-950: oklch(0.14 0.006 264.89);
+  --neutral-50: oklch(0.97 0 0);
+  --neutral-100: oklch(0.93 0 0);
+  --neutral-200: oklch(0.8452 0 0);
+  --neutral-300: oklch(0.76 0 0);
+  --neutral-400: oklch(0.64 0 0);
+  --neutral-500: oklch(0.53 0 0);
+  --neutral-600: oklch(0.45 0 0);
+  --neutral-700: oklch(0.37 0 0);
+  --neutral-800: oklch(0.29 0 0);
+  --neutral-900: oklch(0.21 0 0);
+  --neutral-950: oklch(0.14 0 0);
   /* navy scale */
-  --navy-50: oklch(0.97 0.014 264.89);
-  --navy-100: oklch(0.93 0.0295 264.89);
-  --navy-200: oklch(0.86 0.0531 264.89);
-  --navy-300: oklch(0.76 0.0826 264.89);
-  --navy-400: oklch(0.64 0.1063 264.89);
-  --navy-500: oklch(0.53 0.1181 264.89);
-  --navy-600: oklch(0.45 0.1122 264.89);
-  --navy-700: oklch(0.37 0.1004 264.89);
-  --navy-800: oklch(0.29 0.0826 264.89);
-  --navy-900: oklch(0.2188 0.0649 264.89);
-  --navy-950: oklch(0.14 0.0472 264.89);
+  --navy-50: oklch(0.97 0.0141 263.74);
+  --navy-100: oklch(0.93 0.0288 263.74);
+  --navy-200: oklch(0.86 0.0519 263.74);
+  --navy-300: oklch(0.76 0.0807 263.74);
+  --navy-400: oklch(0.64 0.1038 263.74);
+  --navy-500: oklch(0.53 0.1153 263.74);
+  --navy-600: oklch(0.45 0.1095 263.74);
+  --navy-700: oklch(0.37 0.098 263.74);
+  --navy-800: oklch(0.29 0.0807 263.74);
+  --navy-900: oklch(0.2214 0.0634 263.74);
+  --navy-950: oklch(0.14 0.0461 263.74);
   /* gold scale */
-  --gold-50: oklch(0.97 0.0357 88.45);
-  --gold-100: oklch(0.93 0.0658 88.45);
-  --gold-200: oklch(0.8574 0.1185 88.45);
-  --gold-300: oklch(0.76 0.1553 88.45);
-  --gold-400: oklch(0.64 0.1308 88.45);
-  --gold-500: oklch(0.53 0.1083 88.45);
-  --gold-600: oklch(0.45 0.0919 88.45);
-  --gold-700: oklch(0.37 0.0756 88.45);
-  --gold-800: oklch(0.29 0.0592 88.45);
-  --gold-900: oklch(0.21 0.0429 88.45);
-  --gold-950: oklch(0.14 0.0286 88.45);
+  --gold-50: oklch(0.97 0.0365 89);
+  --gold-100: oklch(0.93 0.0657 89);
+  --gold-200: oklch(0.8565 0.1182 89);
+  --gold-300: oklch(0.76 0.1553 89);
+  --gold-400: oklch(0.64 0.1308 89);
+  --gold-500: oklch(0.53 0.1083 89);
+  --gold-600: oklch(0.45 0.0919 89);
+  --gold-700: oklch(0.37 0.0756 89);
+  --gold-800: oklch(0.29 0.0593 89);
+  --gold-900: oklch(0.21 0.0429 89);
+  --gold-950: oklch(0.14 0.0286 89);
   /* success scale */
   --success-50: oklch(0.97 0.0162 145);
   --success-100: oklch(0.93 0.0271 145);
@@ -191,7 +191,7 @@
 
 /* Utilities reference the role/scale variables — one source of truth */
 @theme inline {
-  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
   --transition-duration-micro: var(--motion-micro);
   --transition-duration-standard: var(--motion-standard);
   --transition-duration-confirm: var(--motion-confirm);

@@ -18,9 +18,9 @@ export function BrandLockup({ preload = false }: BrandLockupProps): ReactElement
       <Image src={brandAssets.faviconGoldNoBackground.image} alt="" className="size-8" preload={preload} />
       <span className="flex flex-col">
         <span className="text-base leading-tight font-bold tracking-wide text-gold-200">
-          TESORO <span className="font-light">GLOBAL</span>
+          TESORO <span className="font-medium">GLOBAL</span>
         </span>
-        <span className="text-xs leading-tight font-light tracking-widest">CONECTANDO AL MUNDO</span>
+        <span className="text-xs leading-tight font-medium tracking-widest">CONECTANDO AL MUNDO</span>
       </span>
     </span>
   );

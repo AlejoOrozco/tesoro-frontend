@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Outfit } from "next/font/google";
+import { Montserrat } from "next/font/google";
 
 import { SkipToContent } from "@/components/skip-to-content";
 import { ThemeInitScript } from "@/components/theme-init-script";
@@ -7,9 +7,10 @@ import { SEEDS } from "@/scripts/tokens/scale-config";
 
 import "./globals.css";
 
-const outfit = Outfit({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  weight: ["500", "700"],
+  variable: "--font-montserrat",
   display: "swap",
 });
 
@@ -31,8 +32,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es" className={outfit.variable}>
-      <body className="bg-background font-sans text-foreground">
+    // ThemeInitScript sets data-theme on <html> before hydration (no-flash). That
+    // attribute is expected to differ from the SSR markup; suppress only this node.
+    <html lang="es" className={montserrat.variable} suppressHydrationWarning>
+      <body className="bg-background font-sans font-medium text-foreground">
         <ThemeInitScript />
         <SkipToContent />
         {children}

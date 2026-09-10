@@ -5,6 +5,7 @@ import { BrandLockup } from "@/components/brand-lockup";
 import { Container } from "@/components/container";
 import { contact, whatsappUrl } from "@/lib/contact";
 import { LEGAL_ITEMS, NAV_ITEMS, type NavItem } from "@/lib/navigation";
+import { SUCURSALES } from "@/lib/sucursales";
 
 interface ContactChannel {
   readonly href: string;
@@ -32,7 +33,7 @@ const FOOTER_LINK_CLASSES =
 function FooterLinkColumn({ title, items }: { readonly title: string; readonly items: readonly NavItem[] }): ReactElement {
   return (
     <nav aria-label={title}>
-      <h2 className="text-sm font-semibold tracking-wide text-gold-200">{title}</h2>
+      <h2 className="text-sm font-bold tracking-wide text-gold-200">{title}</h2>
       <ul className="mt-2">
         {items.map((item) => (
           <li key={item.href}>
@@ -43,6 +44,50 @@ function FooterLinkColumn({ title, items }: { readonly title: string; readonly i
         ))}
       </ul>
     </nav>
+  );
+}
+
+function FooterSucursales(): ReactElement {
+  return (
+    <div id="sucursales">
+      <h2 className="text-sm font-bold tracking-wide text-gold-200">Sucursales</h2>
+      <ul className="mt-2 flex flex-col gap-4">
+        {SUCURSALES.map((sucursal) => (
+          <li key={sucursal.id} className="text-sm text-neutral-300">
+            <p className="font-medium text-chrome-foreground">{sucursal.name}</p>
+            <p>{sucursal.city}</p>
+            <p>{sucursal.address}</p>
+            {sucursal.mapsUrl !== undefined && (
+              <a href={sucursal.mapsUrl} target="_blank" rel="noreferrer" className={FOOTER_LINK_CLASSES}>
+                Ver en Google Maps
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function FooterContact({ channels }: { readonly channels: readonly ContactChannel[] }): ReactElement | null {
+  if (channels.length === 0) return null;
+  return (
+    <div>
+      <h2 className="text-sm font-bold tracking-wide text-gold-200">Contacto</h2>
+      <ul className="mt-2">
+        {channels.map((channel) => (
+          <li key={channel.href}>
+            <a
+              href={channel.href}
+              className={FOOTER_LINK_CLASSES}
+              {...(channel.isExternal && { target: "_blank", rel: "noreferrer" })}
+            >
+              {channel.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -58,34 +103,11 @@ export function SiteFooter(): ReactElement {
             Tecnología y accesorios, sin fronteras. Productos originales con envío a todo el país.
           </p>
         </div>
-
-        <FooterLinkColumn
-          title="Navegación"
-          items={[...NAV_ITEMS, { href: "/#sucursales", label: "Sucursales" }]}
-        />
-
+        <FooterLinkColumn title="Navegación" items={NAV_ITEMS} />
+        <FooterSucursales />
         <FooterLinkColumn title="Legal" items={LEGAL_ITEMS} />
-
-        {channels.length > 0 && (
-          <div>
-            <h2 className="text-sm font-semibold tracking-wide text-gold-200">Contacto</h2>
-            <ul className="mt-2">
-              {channels.map((channel) => (
-                <li key={channel.href}>
-                  <a
-                    href={channel.href}
-                    className={FOOTER_LINK_CLASSES}
-                    {...(channel.isExternal && { target: "_blank", rel: "noreferrer" })}
-                  >
-                    {channel.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <FooterContact channels={channels} />
       </Container>
-
       <div className="border-t border-navy-700">
         <Container className="flex min-h-11 flex-wrap items-center justify-between gap-2 py-4">
           <p className="text-xs text-neutral-300">
