@@ -10,7 +10,7 @@ export default function MarketingLayout({ children }: LayoutProps<"/">) {
       <main
         id={MAIN_CONTENT_ID}
         tabIndex={-1}
-        className="focus-visible:ring-primary focus-visible:ring-offset-background flex-1 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+        className="flex-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
         {children}
       </main>
