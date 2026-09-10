@@ -12,6 +12,7 @@ User-visible copy is **Spanish**. Routes, files, identifiers, and commits are **
 pnpm dev
 pnpm lint
 pnpm build
+pnpm tokens   # regenerate design tokens + WCAG contrast gate (fails on a bad pairing)
 ```
 
 Copy `.env.example` to `.env.local` for local public config. Never commit `.env*`.
@@ -20,8 +21,9 @@ Copy `.env.example` to `.env.local` for local public config. Never commit `.env*
 
 ```
 app/
-├── layout.tsx              Root document (html/body). Required by App Router.
-├── globals.css             Design tokens live here (Stage 1.2).
+├── layout.tsx              Root document (html/body) + Outfit via next/font.
+├── globals.css             Imports Tailwind and the generated tokens.
+├── styles/tokens.css       GENERATED design tokens — never edit; run `pnpm tokens`.
 ├── icon.png                Favicon (navy, no background).
 ├── (marketing)/            Public marketing routes — URL is not affected by the group name
 │   └── page.tsx            /  (landing)
@@ -29,6 +31,7 @@ app/
 assets/brand/               Logo and favicon source files. Import via `assets/brand.ts`.
 lib/                        Shared non-UI code (contact constants, later API clients).
 components/                 Shared UI. Created when the first primitive lands (Stage 2).
+scripts/                    Build-time tooling: generate-tokens.ts (OKLCH scales + WCAG gate).
 docs/                       Product plan, infrastructure, and UI pattern docs.
 ```
 

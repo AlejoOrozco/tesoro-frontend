@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "tokens": "tsx scripts/generate-tokens.ts"
   },
   "dependencies": {
     "next": "16.3.4",
@@ -15,12 +16,15 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/culori": "^4.0.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "culori": "^4.0.2",
     "eslint": "^9",
     "eslint-config-next": "16.3.4",
     "tailwindcss": "^4",
+    "tsx": "^4.23.13",
     "typescript": "^5"
   },
   "packageManager": "pnpm@10.34.2"

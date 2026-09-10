@@ -1,1 +1,3 @@
 @import "tailwindcss";
+/* Generated design tokens (scales, role mapping, @theme). Regenerate: pnpm tokens */
+@import "./styles/tokens.css";
