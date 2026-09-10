@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Outfit } from "next/font/google";
 
 import { SkipToContent } from "@/components/skip-to-content";
+import { ThemeInitScript } from "@/components/theme-init-script";
 import { SEEDS } from "@/scripts/tokens/scale-config";
 
 import "./globals.css";
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es" className={outfit.variable}>
       <body className="bg-background font-sans text-foreground">
+        <ThemeInitScript />
         <SkipToContent />
         {children}
       </body>

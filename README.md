@@ -30,8 +30,8 @@ app/
 │   └── page.tsx            /  (landing)
 └── (shop)/                 Reserved. Catalog/cart land here later without a rewrite.
 assets/brand/               Logo and favicon source files. Import via `assets/brand.ts`.
-lib/                        Shared non-UI code (contact constants, landmarks, later API clients).
-components/                 Shared UI (skip-to-content; more primitives in Stage 2).
+lib/                        Shared non-UI code (contact constants, landmarks, theme, later API clients).
+components/                 Shared UI (skip-to-content, theme init script; more primitives in Stage 2).
 scripts/                    Build-time tooling: generate-tokens.ts (OKLCH scales + WCAG gate).
 docs/                       Product plan, infrastructure, and UI pattern docs.
 ```
@@ -47,6 +47,10 @@ Logos whose `hasBakedBackground` is `true` (`logo-gold.jpg`, `logo-navy.jpg`) mu
 ## Contact
 
 Phone, WhatsApp, and email live in **one** place: `lib/contact.ts`, fed by `NEXT_PUBLIC_*` values in `.env.local`. Do not hardcode them in components.
+
+## Theming
+
+Light is default; dark maps the same role tokens to other scale steps (`app/styles/tokens.css`). With no stored choice, the OS preference applies. A manual choice is persisted under the `tesoro-theme` localStorage key and applied pre-paint by `components/theme-init-script.tsx`; the header toggle (Stage 3) calls `setTheme` from `lib/theme.ts`. Content imagery must be background-free so it sits on either theme.
 
 ## Design
 

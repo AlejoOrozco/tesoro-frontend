@@ -54,8 +54,9 @@ function rootBlock(scales: TokenScales["scales"]): string {
 }
 
 function themeBlocks(resolved: ResolvedThemes): string {
-  const light = roleLines(resolved.themes.light).join("\n");
-  const dark = roleLines(resolved.themes.dark).join("\n");
+  // color-scheme keeps native UI (scrollbars, form controls) on-theme.
+  const light = [...roleLines(resolved.themes.light), "  color-scheme: light;"].join("\n");
+  const dark = [...roleLines(resolved.themes.dark), "  color-scheme: dark;"].join("\n");
   return [
     `/* Role tokens — light (default) */`,
     `:root,\n[data-theme="light"] {\n${light}\n}`,
