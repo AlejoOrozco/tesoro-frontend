@@ -26,11 +26,12 @@ app/
 ├── styles/tokens.css       GENERATED design tokens — never edit; run `pnpm tokens`.
 ├── icon.png                Favicon (navy, no background).
 ├── (marketing)/            Public marketing routes — URL is not affected by the group name
+│   ├── layout.tsx          Skip-link target (`#main-content`). Header/footer land in Stage 3.
 │   └── page.tsx            /  (landing)
 └── (shop)/                 Reserved. Catalog/cart land here later without a rewrite.
 assets/brand/               Logo and favicon source files. Import via `assets/brand.ts`.
-lib/                        Shared non-UI code (contact constants, later API clients).
-components/                 Shared UI. Created when the first primitive lands (Stage 2).
+lib/                        Shared non-UI code (contact constants, landmarks, later API clients).
+components/                 Shared UI (skip-to-content; more primitives in Stage 2).
 scripts/                    Build-time tooling: generate-tokens.ts (OKLCH scales + WCAG gate).
 docs/                       Product plan, infrastructure, and UI pattern docs.
 ```
