@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tesoro Global SAS — Public site (`www`)
 
-## Getting Started
+Next.js frontend for **www.tesoroglobalsas.com**: marketing/landing now, storefront later.
 
-First, run the development server:
+This repository never talks to the database. Business data goes through the NestJS API (`api.tesoroglobalsas.com`) once those endpoints exist. The authenticated app (`app.tesoroglobalsas.com`) is a **separate** Next.js project and is not in this repo.
+
+User-visible copy is **Spanish**. Routes, files, identifiers, and commits are **English**.
+
+## Scripts
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
+pnpm lint
+pnpm build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Copy `.env.example` to `.env.local` for local public config. Never commit `.env*`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Folder conventions
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/
+├── layout.tsx              Root document (html/body). Required by App Router.
+├── globals.css             Design tokens live here (Stage 1.2).
+├── icon.png                Favicon (navy, no background).
+├── (marketing)/            Public marketing routes — URL is not affected by the group name
+│   └── page.tsx            /  (landing)
+└── (shop)/                 Reserved. Catalog/cart land here later without a rewrite.
+assets/brand/               Logo and favicon source files. Import via `assets/brand.ts`.
+lib/                        Shared non-UI code (contact constants, later API clients).
+components/                 Shared UI. Created when the first primitive lands (Stage 2).
+docs/                       Product plan, infrastructure, and UI pattern docs.
+```
 
-## Learn More
+Route groups (`(marketing)`, `(shop)`) organize layouts without changing URLs. Adding `/products` later means `app/(shop)/products/page.tsx`, not moving the landing page.
 
-To learn more about Next.js, take a look at the following resources:
+## Brand assets
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Import from `@/assets/brand`. Pass `asset.image` to `next/image` so Next.js can compress to WebP and set width/height.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Logos whose `hasBakedBackground` is `true` (`logo-gold.jpg`, `logo-navy.jpg`) must **not** sit on theme-dependent surfaces (hero, header). Use the `*-no-background.png` variants there. Baked-background files are for surfaces we fully control (for example Open Graph images).
 
-## Deploy on Vercel
+## Contact
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Phone, WhatsApp, and email live in **one** place: `lib/contact.ts`, fed by `NEXT_PUBLIC_*` values in `.env.local`. Do not hardcode them in components.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Design
+
+Visual values (spacing, radius, motion, color) come from `docs/design/`. Do not invent one-off numbers in components.
+
+## Related docs
+
+- `docs/PROJECT_PLAN.md` — scope, architecture, phase plan
+- `docs/INFRASTRUCTURE.md` — hosting, domains, environments
+- `docs/design/` — UI patterns and token scales
