@@ -17,9 +17,8 @@
  *   p-1=4px p-2=8px p-3=12px p-4=16px p-6=24px p-8=32px p-12=48px p-16=64px
  * Non-utility CSS uses var(--space-4) … var(--space-64).
  *
- * Theming: :root = light, [data-theme="dark"] = dark; when data-theme is
- * unset the OS preference applies. Nested [data-theme] panels re-theme their
- * subtree (used by /dev/tokens).
+ * Theming: :root = light. Dark role tokens live on [data-theme="dark"]
+ * and are not applied unless that attribute is set.
  */
 
 :root {
@@ -125,23 +124,23 @@
 /* Role tokens — light (default) */
 :root,
 [data-theme="light"] {
-  --background: var(--neutral-50);
-  --surface: var(--neutral-100);
-  --border: var(--neutral-400);
+  --background: var(--neutral-100);
+  --surface: var(--neutral-50);
+  --border: var(--neutral-500);
   --text-muted: var(--neutral-600);
   --text-primary: var(--neutral-900);
   --secondary-surface: var(--gold-100);
   --secondary-border: var(--gold-300);
-  --action-primary: var(--gold-500);
-  --action-primary-hover: var(--gold-600);
-  --action-primary-active: var(--gold-700);
-  --action-primary-text: var(--neutral-50);
+  --action-primary: var(--gold-100);
+  --action-primary-hover: var(--gold-200);
+  --action-primary-active: var(--gold-300);
+  --action-primary-text: var(--neutral-900);
   --chrome: var(--navy-900);
   --chrome-text: var(--neutral-50);
   color-scheme: light;
 }
 
-/* Role tokens — dark */
+/* Role tokens — dark (unused until data-theme="dark") */
 [data-theme="dark"] {
   --background: var(--neutral-900);
   --surface: var(--neutral-800);
@@ -150,33 +149,13 @@
   --text-primary: var(--neutral-50);
   --secondary-surface: var(--gold-800);
   --secondary-border: var(--gold-700);
-  --action-primary: var(--gold-400);
-  --action-primary-hover: var(--gold-300);
-  --action-primary-active: var(--gold-200);
+  --action-primary: var(--gold-100);
+  --action-primary-hover: var(--gold-200);
+  --action-primary-active: var(--gold-300);
   --action-primary-text: var(--neutral-900);
   --chrome: var(--navy-900);
   --chrome-text: var(--neutral-50);
   color-scheme: dark;
-}
-
-/* OS preference applies only while data-theme is unset (toggle lands in 1.4) */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    --background: var(--neutral-900);
-    --surface: var(--neutral-800);
-    --border: var(--neutral-500);
-    --text-muted: var(--neutral-300);
-    --text-primary: var(--neutral-50);
-    --secondary-surface: var(--gold-800);
-    --secondary-border: var(--gold-700);
-    --action-primary: var(--gold-400);
-    --action-primary-hover: var(--gold-300);
-    --action-primary-active: var(--gold-200);
-    --action-primary-text: var(--neutral-900);
-    --chrome: var(--navy-900);
-    --chrome-text: var(--neutral-50);
-    color-scheme: dark;
-  }
 }
 
 /* Tailwind theme — wipe the default palette and radius so only tokens exist */

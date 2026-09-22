@@ -9,19 +9,21 @@ interface BrandLockupProps {
 }
 
 /**
- * Diamond + typed wordmark, for navy (chrome) surfaces. No horizontal wordmark
- * asset exists, so the lockup is composed, matching the approved mocks.
+ * Stacked gold lockup (diamond + Tesoro Global SAS) for navy chrome.
+ * The source file is a padded square; the frame crops to the artwork so the
+ * mark reads at header height without the typed wordmark beside it.
  */
 export function BrandLockup({ preload = false }: BrandLockupProps): ReactElement {
   return (
-    <span className="flex items-center gap-3">
-      <Image src={brandAssets.faviconGoldNoBackground.image} alt="" className="size-8" preload={preload} />
-      <span className="flex flex-col">
-        <span className="text-base leading-tight font-bold tracking-wide text-gold-200">
-          TESORO <span className="font-medium">GLOBAL</span>
-        </span>
-        <span className="text-xs leading-tight font-medium tracking-widest">CONECTANDO AL MUNDO</span>
-      </span>
+    <span className="relative block h-16 w-32">
+      <Image
+        src={brandAssets.logoGoldNoLabel}
+        alt="Tesoro Global SAS"
+        fill
+        sizes="128px"
+        className="object-cover object-center"
+        preload={preload}
+      />
     </span>
   );
 }

@@ -12,6 +12,7 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
+import { logger } from "../lib/logger";
 import { buildAllScales } from "./tokens/build-scales";
 import { gateFailures, runContrastChecks } from "./tokens/check-contrast";
 import { buildTokensCss } from "./tokens/emit";
@@ -27,7 +28,7 @@ function main(): void {
   const failures = gateFailures(results);
   if (failures.length > 0) {
     for (const failure of failures) {
-      console.error(
+      logger.error(
         `CONTRAST FAIL [${failure.theme}] ${failure.fg} (${failure.fgRef}) on ${failure.bg} (${failure.bgRef}): ` +
           `${failure.ratio}:1 < ${failure.min}:1`,
       );
@@ -39,17 +40,17 @@ function main(): void {
   writeFileSync(CSS_PATH, buildTokensCss(all.scales, resolved));
 
   const gated = results.filter((result) => result.gate).length;
-  console.log(`tokens: ${gated} contrast gates passed (light + dark)`);
-  console.log(`  navy seed ${all.seeds.navy.oklch} → anchor step ${all.seeds.navy.anchorStep}`);
-  console.log(`  gold seed ${all.seeds.gold.oklch} → anchor step ${all.seeds.gold.anchorStep}`);
-  console.log(`  gray seed ${all.seeds.gray.oklch} → anchor step ${all.seeds.gray.anchorStep} (neutral scale)`);
-  for (const deviation of resolved.deviations) console.log(`  deviation: ${deviation}`);
-  console.log(`  wrote ${path.relative(process.cwd(), CSS_PATH)}`);
+  logger.info(`tokens: ${gated} contrast gates passed (light + dark)`);
+  logger.info(`  navy seed ${all.seeds.navy.oklch} → anchor step ${all.seeds.navy.anchorStep}`);
+  logger.info(`  gold seed ${all.seeds.gold.oklch} → anchor step ${all.seeds.gold.anchorStep}`);
+  logger.info(`  gray seed ${all.seeds.gray.oklch} → anchor step ${all.seeds.gray.anchorStep} (neutral scale)`);
+  for (const deviation of resolved.deviations) logger.info(`  deviation: ${deviation}`);
+  logger.info(`  wrote ${path.relative(process.cwd(), CSS_PATH)}`);
 }
 
 try {
   main();
 } catch (error) {
-  console.error(error instanceof Error ? error.message : error);
+  logger.error("Token generation failed", error);
   process.exit(1);
 }

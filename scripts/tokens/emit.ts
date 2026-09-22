@@ -23,9 +23,8 @@ const HEADER = `/*
  *   p-1=4px p-2=8px p-3=12px p-4=16px p-6=24px p-8=32px p-12=48px p-16=64px
  * Non-utility CSS uses var(--space-4) … var(--space-64).
  *
- * Theming: :root = light, [data-theme="dark"] = dark; when data-theme is
- * unset the OS preference applies. Nested [data-theme] panels re-theme their
- * subtree (used by /dev/tokens).
+ * Theming: :root = light. Dark role tokens live on [data-theme="dark"]
+ * and are not applied unless that attribute is set.
  */`;
 
 const varName = (scale: ScaleName, step: number): string => `--${scale}-${step}`;
@@ -61,14 +60,8 @@ function themeBlocks(resolved: ResolvedThemes): string {
     `/* Role tokens — light (default) */`,
     `:root,\n[data-theme="light"] {\n${light}\n}`,
     ``,
-    `/* Role tokens — dark */`,
+    `/* Role tokens — dark (unused until data-theme="dark") */`,
     `[data-theme="dark"] {\n${dark}\n}`,
-    ``,
-    `/* OS preference applies only while data-theme is unset (toggle lands in 1.4) */`,
-    `@media (prefers-color-scheme: dark) {\n  :root:not([data-theme]) {\n${dark
-      .split("\n")
-      .map((line) => `  ${line}`)
-      .join("\n")}\n  }\n}`,
   ].join("\n");
 }
 

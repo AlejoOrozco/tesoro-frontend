@@ -9,22 +9,20 @@ interface EmptyStateProps {
   readonly description: string;
   /** One clear next step — usually a Button or ButtonLink. */
   readonly action: ReactNode;
-  /** 1 when the state is the page's main content (404), 2 inside a page. */
-  readonly headingLevel?: 1 | 2;
 }
 
 /**
  * The one shared pattern for 404 / empty lists / failed requests
  * (docs/design/empty-and-error-states.md): icon + a human sentence + one action.
  */
-export function EmptyState({ icon, title, description, action, headingLevel = 1 }: EmptyStateProps): ReactElement {
+export function EmptyState({ icon, title, description, action }: EmptyStateProps): ReactElement {
   return (
     <div className="mx-auto flex max-w-md flex-col items-center gap-4 text-center">
       <div aria-hidden="true" className="text-muted [&_svg]:size-12">
         {icon}
       </div>
-      <Heading level={headingLevel}>{title}</Heading>
-      <Text tone="muted">{description}</Text>
+      <Heading level={1}>{title}</Heading>
+      <Text>{description}</Text>
       <div className="mt-2">{action}</div>
     </div>
   );

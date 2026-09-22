@@ -1,2 +1,7 @@
-/** Soft surface for landing cards — light ring + shadow, not the 3:1 UI `border` token. */
-export const SOFT_CARD_CLASSES = "rounded-lg bg-background p-4 shadow-sm ring-1 ring-neutral-200";
+/** Soft surface for landing cards — light ring, not the 3:1 UI `border` token. */
+const SOFT_CARD_SURFACE = "rounded-lg bg-surface ring-1 ring-neutral-200";
+
+export const SOFT_CARD_CLASSES = `${SOFT_CARD_SURFACE} shadow-sm`;
+
+/** Collection rails — a chrome-tinted lift around the panel edge. */
+export const SOFT_RAIL_CARD_CLASSES = `${SOFT_CARD_SURFACE} rail-card`;

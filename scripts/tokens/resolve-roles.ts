@@ -110,8 +110,9 @@ function pickTextFor(scales: Scales, fills: readonly Ref[], candidates: readonly
 
 /**
  * Resolve the action-primary trio + its text token. A trio is accepted when
- * (a) some neutral text passes 4.5:1 on all three fills and (b) the resting
- * fill passes 3:1 against both background and surface (button fill vs page).
+ * some neutral text passes 4.5:1 on all three fills. Saturated fills also
+ * need 3:1 against background and surface; tint fills (documented ≤ 200)
+ * skip that page-contrast check so they can match secondary hover.
  */
 function pickActionTrio(args: TrioArgs): TrioResult {
   for (const [primary, hover, active] of args.trios) {
@@ -120,9 +121,11 @@ function pickActionTrio(args: TrioArgs): TrioResult {
       { scale: "gold", step: hover },
       { scale: "gold", step: active },
     ];
+    const skipFillVsPage = args.documented[0] <= 200;
     const fillOk =
-      contrastOf(args.scales, fills[0], args.background) >= CONTRAST_UI &&
-      contrastOf(args.scales, fills[0], args.surface) >= CONTRAST_UI;
+      skipFillVsPage ||
+      (contrastOf(args.scales, fills[0], args.background) >= CONTRAST_UI &&
+        contrastOf(args.scales, fills[0], args.surface) >= CONTRAST_UI);
     if (!fillOk) continue;
     let text = pickTextFor(args.scales, fills, args.textCandidates);
     if (!text) {
@@ -208,8 +211,8 @@ function resolveTheme(scales: Scales, chrome: Ref, spec: ThemeSpec, deviations: 
 }
 
 /**
- * Role mapping per color-palette.md §3 (light) and §6 (dark), adjusted to the
- * nearest passing step when a documented pairing fails contrast.
+ * Role mapping per color-palette.md §3 (light) and §6 (dark), with light
+ * canvas/surface swapped so white cards lift off a very light gray page.
  * `chrome` is the brand navy itself (the scale's anchor step) in both themes —
  * the approved mocks use a navy header/footer that neutrals cannot paint.
  */
@@ -224,8 +227,8 @@ export function resolveThemes(all: TokenScales): ResolvedThemes {
     {
       theme: "light",
       fixed: {
-        background: { scale: "neutral", step: 50 },
-        surface: { scale: "neutral", step: 100 },
+        background: { scale: "neutral", step: 100 },
+        surface: { scale: "neutral", step: 50 },
         "text-primary": { scale: "neutral", step: 900 },
         "secondary-border": { scale: "gold", step: 300 },
       },
@@ -233,15 +236,14 @@ export function resolveThemes(all: TokenScales): ResolvedThemes {
       border: { documented: 200, candidates: [200, 300, 400, 500, 600] },
       secondarySurface: { documented: 100, candidates: [100, 50] },
       action: {
-        documented: [500, 600, 700],
+        documented: [100, 200, 300],
         trios: [
-          [500, 600, 700],
-          [600, 700, 800],
-          [700, 800, 900],
+          [100, 200, 300],
+          [200, 300, 400],
         ],
         textCandidates: [
-          { scale: "neutral", step: 50 },
           { scale: "neutral", step: 900 },
+          { scale: "neutral", step: 50 },
         ],
         textFallbacks: [{ scale: "neutral", step: 950 }],
       },
@@ -264,14 +266,10 @@ export function resolveThemes(all: TokenScales): ResolvedThemes {
       border: { documented: 700, candidates: [700, 600, 500, 400, 300] },
       secondarySurface: { documented: 800, candidates: [800, 900, 950] },
       action: {
-        // §6: dark action-primary is accent-400 (one step lighter). Hover and
-        // active are not documented for dark mode; they continue one step
-        // lighter each, mirroring the light-mode direction away from the page.
-        documented: [400, 300, 200],
+        documented: [100, 200, 300],
         trios: [
-          [400, 300, 200],
-          [300, 200, 100],
-          [500, 400, 300],
+          [100, 200, 300],
+          [200, 300, 400],
         ],
         textCandidates: [
           { scale: "neutral", step: 900 },

@@ -87,7 +87,7 @@ function buildSteps(makeOne: (index: number) => ScaleStep): Scale {
  * the chroma taper is normalized by the anchor's factor so the curve passes
  * through the seed smoothly instead of leaving a chroma discontinuity.
  */
-export function buildBrandScale(seedHex: string): { scale: Scale; seed: SeedInfo } {
+function buildBrandScale(seedHex: string): { scale: Scale; seed: SeedInfo } {
   const seed = parseSeed(seedHex);
   const hue = seed.h ?? 0;
   const anchorIndex = nearestStepIndex(seed.l);
@@ -109,7 +109,7 @@ export function buildBrandScale(seedHex: string): { scale: Scale; seed: SeedInfo
 }
 
 /** Semantic scale at a conventional hue, chroma matched to the accent (§4). */
-export function buildSemanticScale(hue: number, accentChroma: number): Scale {
+function buildSemanticScale(hue: number, accentChroma: number): Scale {
   return buildSteps((i) => makeStep(LIGHTNESS[i], accentChroma * CHROMA_FACTOR[i], hue));
 }
 

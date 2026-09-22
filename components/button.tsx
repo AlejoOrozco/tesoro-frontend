@@ -1,10 +1,10 @@
 import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactElement } from "react";
 
-export type ButtonVariant = "primary" | "secondary" | "ghost";
+export type ButtonVariant = "primary" | "secondary";
 
-/** md = 44px general minimum; lg = 56px for primary CTAs (docs/design/forms.md). */
-export type ButtonSize = "md" | "lg";
+/** sm = compact tiles; md = 44px minimum; lg = 56px primary CTAs (docs/design/forms.md). */
+export type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonStyleProps {
   readonly variant?: ButtonVariant;
@@ -17,14 +17,13 @@ const BASE_CLASSES =
   "disabled:pointer-events-none disabled:bg-neutral-200 disabled:text-neutral-500";
 
 const VARIANT_CLASSES: Record<ButtonVariant, string> = {
-  primary: "bg-primary text-primary-foreground hover:bg-primary-hover active:bg-primary-active",
+  primary:
+    "border border-secondary-border bg-primary text-primary-foreground hover:bg-primary-hover active:bg-primary-active",
   secondary: "border border-border bg-surface text-foreground hover:border-secondary-border hover:bg-secondary",
-  /** Outline for navy chrome (hero). Raw navy/gold steps are the documented chrome-adjacent exception. */
-  ghost:
-    "border border-navy-700 bg-transparent text-chrome-foreground hover:border-gold-200 hover:bg-navy-800 hover:text-gold-200",
 };
 
 const SIZE_CLASSES: Record<ButtonSize, string> = {
+  sm: "h-9 px-3 text-xs",
   md: "h-11 px-4 text-sm",
   lg: "h-14 px-6 text-base",
 };

@@ -1,24 +1,23 @@
-import type { ReactElement } from "react";
+import { Fragment, type ReactElement } from "react";
 
-import { ProductCard } from "@/components/product-card";
+import { ImportCallout } from "@/components/import-callout";
+import { NewsletterSignup } from "@/components/newsletter-signup";
+import { ProductRail } from "@/components/product-rail";
 import { Section } from "@/components/section";
-import { Heading, Text } from "@/components/typography";
-import { PRODUCTS } from "@/lib/products";
+import { PRODUCT_COLLECTIONS } from "@/lib/products";
 
 export function ProductsSection(): ReactElement {
   return (
-    <Section id="productos" className="scroll-mt-16">
-      <Heading level={2}>Productos destacados</Heading>
-      <Text tone="muted" className="mt-2 max-w-2xl">
-        Tecnología y accesorios con envío a todo el país. Precios de referencia mientras cerramos el catálogo.
-      </Text>
-      <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {PRODUCTS.map((product) => (
-          <li key={product.id}>
-            <ProductCard product={product} />
-          </li>
+    <Section id="productos" className="scroll-mt-[var(--header-offset)]">
+      <div className="flex flex-col gap-8">
+        {PRODUCT_COLLECTIONS.map((collection) => (
+          <Fragment key={collection.id}>
+            <ProductRail collection={collection} />
+            {collection.id === "power" ? <ImportCallout /> : null}
+          </Fragment>
         ))}
-      </ul>
+        <NewsletterSignup />
+      </div>
     </Section>
   );
 }

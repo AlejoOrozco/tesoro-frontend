@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Montserrat } from "next/font/google";
+import type { ReactElement } from "react";
 
 import { SkipToContent } from "@/components/skip-to-content";
-import { ThemeInitScript } from "@/components/theme-init-script";
 import { SEEDS } from "@/scripts/tokens/scale-config";
 
 import "./globals.css";
@@ -28,15 +28,13 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: SEEDS.navy,
+  colorScheme: "light",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: LayoutProps<"/">): ReactElement {
   return (
-    // ThemeInitScript sets data-theme on <html> before hydration (no-flash). That
-    // attribute is expected to differ from the SSR markup; suppress only this node.
-    <html lang="es" className={montserrat.variable} suppressHydrationWarning>
+    <html lang="es" className={montserrat.variable}>
       <body className="bg-background font-sans font-medium text-foreground">
-        <ThemeInitScript />
         <SkipToContent />
         {children}
       </body>

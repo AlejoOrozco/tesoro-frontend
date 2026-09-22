@@ -4,10 +4,18 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  cobe@2.0.1:
+    hash: 8ae7396f58d95a0605af004cfb2bd5955b70917240377b296fc34574c2623502
+    path: patches/cobe@2.0.1.patch
+
 importers:
 
   .:
     dependencies:
+      cobe:
+        specifier: ^2.0.1
+        version: 2.0.1(patch_hash=8ae7396f58d95a0605af004cfb2bd5955b70917240377b296fc34574c2623502)
       next:
         specifier: 16.3.4
         version: 16.3.4(@babel/core@7.29.7)(@types/node@20.19.43)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1047,6 +1055,9 @@ packages:
 
   client-only@0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
+
+  cobe@2.0.1:
+    resolution: {integrity: sha512-aaa6vcIlaC8C1SF50LDH0Anybo/EAXnrxqe+bwvr4+YUtZydqjeBjTTD7ziCCkbRrRGSns3I3F6cZsf3W+L+ag==}
 
   color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
@@ -3060,6 +3071,8 @@ snapshots:
       supports-color: 7.2.0
 
   client-only@0.0.1: {}
+
+  cobe@2.0.1(patch_hash=8ae7396f58d95a0605af004cfb2bd5955b70917240377b296fc34574c2623502): {}
 
   color-convert@2.0.1:
     dependencies:

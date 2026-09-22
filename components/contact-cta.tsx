@@ -6,8 +6,7 @@ import { whatsappUrl } from "@/lib/contact";
 
 interface ContactCtaProps {
   readonly message: string;
-  readonly whatsappLabel: string;
-  readonly fallbackLabel?: string;
+  readonly label: string;
   readonly variant?: ButtonVariant;
   readonly size?: ButtonSize;
 }
@@ -15,8 +14,7 @@ interface ContactCtaProps {
 /** WhatsApp with a prefilled message when configured; /contact otherwise. */
 export function ContactCta({
   message,
-  whatsappLabel,
-  fallbackLabel = "Contáctanos",
+  label,
   variant = "secondary",
   size = "md",
 }: ContactCtaProps): ReactElement {
@@ -25,13 +23,13 @@ export function ContactCta({
   if (whatsapp === null) {
     return (
       <Link href="/contact" className={classes}>
-        {fallbackLabel}
+        {label}
       </Link>
     );
   }
   return (
     <a href={whatsapp} target="_blank" rel="noreferrer" className={classes}>
-      {whatsappLabel}
+      {label}
     </a>
   );
 }

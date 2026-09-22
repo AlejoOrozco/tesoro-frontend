@@ -10,6 +10,7 @@
     "tokens": "tsx scripts/generate-tokens.ts"
   },
   "dependencies": {
+    "cobe": "^2.0.1",
     "next": "16.3.4",
     "react": "19.2.8",
     "react-dom": "19.2.8"
@@ -27,5 +28,10 @@
     "tsx": "^4.23.13",
     "typescript": "^5"
   },
-  "packageManager": "pnpm@10.34.2"
+  "packageManager": "pnpm@10.34.2",
+  "pnpm": {
+    "patchedDependencies": {
+      "cobe@2.0.1": "patches/cobe@2.0.1.patch"
+    }
+  }
 }

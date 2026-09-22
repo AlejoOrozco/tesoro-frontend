@@ -1,5 +1,7 @@
 "use client";
 
+import type { ReactElement } from "react";
+
 import { Button } from "@/components/button";
 import { EmptyState } from "@/components/empty-state";
 import { AlertTriangleIcon } from "@/components/icons";
@@ -15,7 +17,7 @@ interface RootErrorProps {
  * Root error boundary: plain-language message + retry, never internal details
  * (docs/design/empty-and-error-states.md + loading-states.md rule 6).
  */
-export default function RootError({ reset }: RootErrorProps) {
+export default function RootError({ reset }: RootErrorProps): ReactElement {
   return (
     <main id={MAIN_CONTENT_ID} tabIndex={-1} className="flex min-h-dvh items-center">
       <Section className="w-full">

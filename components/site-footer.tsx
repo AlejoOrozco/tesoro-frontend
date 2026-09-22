@@ -1,11 +1,14 @@
 import Link from "next/link";
 import type { ReactElement } from "react";
 
-import { BrandLockup } from "@/components/brand-lockup";
 import { Container } from "@/components/container";
+import { FooterBrand } from "@/components/footer-brand";
+import { FooterCredit } from "@/components/footer-credit";
+import { FooterGlobe } from "@/components/footer-globe";
+import { FooterSucursales } from "@/components/footer-sucursales";
+import { FOOTER_HEADING_CLASSES, FOOTER_LINK_CLASSES } from "@/components/footer-styles";
 import { contact, whatsappUrl } from "@/lib/contact";
 import { LEGAL_ITEMS, NAV_ITEMS, type NavItem } from "@/lib/navigation";
-import { SUCURSALES } from "@/lib/sucursales";
 
 interface ContactChannel {
   readonly href: string;
@@ -20,20 +23,26 @@ function contactChannels(): readonly ContactChannel[] {
     whatsapp === null ? null : { href: whatsapp, label: "WhatsApp", isExternal: true },
     contact.phoneTel === ""
       ? null
-      : { href: `tel:${contact.phoneTel}`, label: contact.phoneDisplay === "" ? contact.phoneTel : contact.phoneDisplay, isExternal: false },
+      : {
+          href: `tel:${contact.phoneTel}`,
+          label: contact.phoneDisplay === "" ? contact.phoneTel : contact.phoneDisplay,
+          isExternal: false,
+        },
     contact.email === "" ? null : { href: `mailto:${contact.email}`, label: contact.email, isExternal: false },
   ];
   return channels.filter((channel): channel is ContactChannel => channel !== null);
 }
 
-const FOOTER_LINK_CLASSES =
-  "inline-flex min-h-11 items-center text-sm text-neutral-300 transition-colors duration-micro hover:text-gold-200 " +
-  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary rounded-sm";
-
-function FooterLinkColumn({ title, items }: { readonly title: string; readonly items: readonly NavItem[] }): ReactElement {
+function FooterLinkColumn({
+  title,
+  items,
+}: {
+  readonly title: string;
+  readonly items: readonly NavItem[];
+}): ReactElement {
   return (
-    <nav aria-label={title}>
-      <h2 className="text-sm font-bold tracking-wide text-gold-200">{title}</h2>
+    <nav aria-label={title} className="relative z-10">
+      <h2 className={FOOTER_HEADING_CLASSES}>{title}</h2>
       <ul className="mt-2">
         {items.map((item) => (
           <li key={item.href}>
@@ -47,33 +56,11 @@ function FooterLinkColumn({ title, items }: { readonly title: string; readonly i
   );
 }
 
-function FooterSucursales(): ReactElement {
-  return (
-    <div id="sucursales">
-      <h2 className="text-sm font-bold tracking-wide text-gold-200">Sucursales</h2>
-      <ul className="mt-2 flex flex-col gap-4">
-        {SUCURSALES.map((sucursal) => (
-          <li key={sucursal.id} className="text-sm text-neutral-300">
-            <p className="font-medium text-chrome-foreground">{sucursal.name}</p>
-            <p>{sucursal.city}</p>
-            <p>{sucursal.address}</p>
-            {sucursal.mapsUrl !== undefined && (
-              <a href={sucursal.mapsUrl} target="_blank" rel="noreferrer" className={FOOTER_LINK_CLASSES}>
-                Ver en Google Maps
-              </a>
-            )}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
 function FooterContact({ channels }: { readonly channels: readonly ContactChannel[] }): ReactElement | null {
   if (channels.length === 0) return null;
   return (
     <div>
-      <h2 className="text-sm font-bold tracking-wide text-gold-200">Contacto</h2>
+      <h2 className={FOOTER_HEADING_CLASSES}>Contacto</h2>
       <ul className="mt-2">
         {channels.map((channel) => (
           <li key={channel.href}>
@@ -93,29 +80,28 @@ function FooterContact({ channels }: { readonly channels: readonly ContactChanne
 
 export function SiteFooter(): ReactElement {
   const channels = contactChannels();
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-chrome text-chrome-foreground">
-      <Container className="grid gap-8 py-12 sm:grid-cols-2 lg:grid-cols-4 sm:py-16">
-        <div className="flex flex-col items-start gap-4">
-          <BrandLockup />
-          <p className="text-sm text-neutral-300">
-            Tecnología y accesorios, sin fronteras. Productos originales con envío a todo el país.
-          </p>
+    <footer className="footer-float bg-chrome text-chrome-foreground">
+      <Container className="pt-16 pb-8 sm:pt-20">
+        <div className="grid gap-x-10 gap-y-4 sm:grid-cols-2 lg:grid-cols-4 lg:items-start">
+          <div className="relative z-10 flex flex-col gap-6 lg:translate-y-8">
+            <FooterBrand />
+            <FooterContact channels={channels} />
+          </div>
+          <FooterLinkColumn title="Navegación" items={NAV_ITEMS} />
+          <FooterLinkColumn title="Legal" items={LEGAL_ITEMS} />
+          <FooterSucursales />
+          <div className="relative z-0 flex justify-center sm:col-span-2 lg:col-span-4 lg:-mt-32">
+            <FooterGlobe />
+          </div>
         </div>
-        <FooterLinkColumn title="Navegación" items={NAV_ITEMS} />
-        <FooterSucursales />
-        <FooterLinkColumn title="Legal" items={LEGAL_ITEMS} />
-        <FooterContact channels={channels} />
+        <div className="relative z-10 mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-neutral-300">© {year} Tesoro Global SAS. Todos los derechos reservados.</p>
+          <FooterCredit />
+        </div>
       </Container>
-      <div className="border-t border-navy-700">
-        <Container className="flex min-h-11 flex-wrap items-center justify-between gap-2 py-4">
-          <p className="text-xs text-neutral-300">
-            © {new Date().getFullYear()} Tesoro Global SAS. Todos los derechos reservados.
-          </p>
-          <p className="text-xs text-neutral-300">Conectando al mundo</p>
-        </Container>
-      </div>
     </footer>
   );
 }

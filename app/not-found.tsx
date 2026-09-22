@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactElement } from "react";
 
 import { ButtonLink } from "@/components/button";
 import { EmptyState } from "@/components/empty-state";
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
   title: "Página no encontrada",
 };
 
-export default function NotFound() {
+export default function NotFound(): ReactElement {
   return (
     <main id={MAIN_CONTENT_ID} tabIndex={-1} className="flex min-h-dvh items-center">
       <Section className="w-full">

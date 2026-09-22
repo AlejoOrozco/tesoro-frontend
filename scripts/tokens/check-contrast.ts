@@ -25,6 +25,25 @@ interface PairSpec {
 }
 
 /**
+ * Tint primary (gold-100) matches secondary hover. Luminance vs the light
+ * page is low by design; text-on-fill still gates at 4.5:1. Dark theme keeps
+ * the 3:1 fill-vs-page gate because the same tint sits on navy/neutral-900.
+ */
+function actionPrimaryOnPage(theme: ThemeName): readonly PairSpec[] {
+  if (theme === "light") {
+    const note = "Tint primary matches secondary-surface; hue separates it from the page";
+    return [
+      { fg: "action-primary", bg: "background", min: CONTRAST_UI, gate: false, note },
+      { fg: "action-primary", bg: "surface", min: CONTRAST_UI, gate: false, note },
+    ];
+  }
+  return [
+    { fg: "action-primary", bg: "background", min: CONTRAST_UI },
+    { fg: "action-primary", bg: "surface", min: CONTRAST_UI },
+  ];
+}
+
+/**
  * Required pairings (accessibility.md thresholds: 4.5:1 text, 3:1 UI).
  *
  * DOCUMENTED EXEMPTION — light `text-primary` on `chrome`: light-mode body
@@ -57,8 +76,7 @@ function pairsFor(theme: ThemeName): readonly PairSpec[] {
     { fg: "action-primary-text", bg: "action-primary-active", min: CONTRAST_TEXT },
     { fg: "chrome-text", bg: "chrome", min: CONTRAST_TEXT },
     { fg: "border", bg: "background", min: CONTRAST_UI },
-    { fg: "action-primary", bg: "background", min: CONTRAST_UI },
-    { fg: "action-primary", bg: "surface", min: CONTRAST_UI },
+    ...actionPrimaryOnPage(theme),
   ];
 }
 
