@@ -17,8 +17,8 @@
  *   p-1=4px p-2=8px p-3=12px p-4=16px p-6=24px p-8=32px p-12=48px p-16=64px
  * Non-utility CSS uses var(--space-4) … var(--space-64).
  *
- * Theming: :root = light. Dark role tokens live on [data-theme="dark"]
- * and are not applied unless that attribute is set.
+ * Theming: :root = light, [data-theme="dark"] = dark navy; when data-theme
+ * is unset the OS preference applies. Dark canvas is navy, not neutral black.
  */
 
 :root {
@@ -140,10 +140,10 @@
   color-scheme: light;
 }
 
-/* Role tokens — dark (unused until data-theme="dark") */
+/* Role tokens — dark navy */
 [data-theme="dark"] {
-  --background: var(--neutral-900);
-  --surface: var(--neutral-800);
+  --background: var(--navy-900);
+  --surface: var(--navy-800);
   --border: var(--neutral-500);
   --text-muted: var(--neutral-300);
   --text-primary: var(--neutral-50);
@@ -156,6 +156,26 @@
   --chrome: var(--navy-900);
   --chrome-text: var(--neutral-50);
   color-scheme: dark;
+}
+
+/* OS preference applies only while data-theme is unset */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --background: var(--navy-900);
+    --surface: var(--navy-800);
+    --border: var(--neutral-500);
+    --text-muted: var(--neutral-300);
+    --text-primary: var(--neutral-50);
+    --secondary-surface: var(--gold-800);
+    --secondary-border: var(--gold-700);
+    --action-primary: var(--gold-100);
+    --action-primary-hover: var(--gold-200);
+    --action-primary-active: var(--gold-300);
+    --action-primary-text: var(--neutral-900);
+    --chrome: var(--navy-900);
+    --chrome-text: var(--neutral-50);
+    color-scheme: dark;
+  }
 }
 
 /* Tailwind theme — wipe the default palette and radius so only tokens exist */

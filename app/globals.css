@@ -17,6 +17,13 @@
   mix-blend-mode: screen;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .wompi-mark {
+    filter: invert(1);
+    mix-blend-mode: screen;
+  }
+}
+
 @keyframes hero-segment-fill {
   from {
     transform: scaleX(0);

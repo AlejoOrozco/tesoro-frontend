@@ -3,6 +3,7 @@ import type { ReactElement } from "react";
 
 import { HEADER_ICON_BUTTON_CLASSES, HEADER_ICON_GLYPH_CLASSES } from "@/components/header-icon-styles";
 import { CartIcon, UserIcon } from "@/components/icons";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { ACCOUNT_ICON_BY_ID, type AccountIconId } from "@/lib/navigation";
 
 const ACCOUNT_ICONS: Record<AccountIconId, (props: { readonly className?: string }) => ReactElement> = {
@@ -25,6 +26,9 @@ function HeaderIconLink({ id }: { readonly id: AccountIconId }): ReactElement {
 export function HeaderAccountIcons(): ReactElement {
   return (
     <ul className="flex items-center gap-4">
+      <li>
+        <ThemeToggle />
+      </li>
       <li>
         <HeaderIconLink id="account" />
       </li>

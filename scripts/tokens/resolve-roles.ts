@@ -213,8 +213,9 @@ function resolveTheme(scales: Scales, chrome: Ref, spec: ThemeSpec, deviations: 
 /**
  * Role mapping per color-palette.md §3 (light) and §6 (dark), with light
  * canvas/surface swapped so white cards lift off a very light gray page.
- * `chrome` is the brand navy itself (the scale's anchor step) in both themes —
- * the approved mocks use a navy header/footer that neutrals cannot paint.
+ * `chrome` is the brand navy itself (the scale's anchor step) in both themes.
+ * Dark canvas and cards use navy steps too, so dark mode is brand navy
+ * rather than a neutral near-black.
  */
 export function resolveThemes(all: TokenScales): ResolvedThemes {
   const { scales, seeds } = all;
@@ -257,8 +258,8 @@ export function resolveThemes(all: TokenScales): ResolvedThemes {
     {
       theme: "dark",
       fixed: {
-        background: { scale: "neutral", step: 900 },
-        surface: { scale: "neutral", step: 800 },
+        background: { scale: "navy", step: 900 },
+        surface: { scale: "navy", step: 800 },
         "text-primary": { scale: "neutral", step: 50 },
         "secondary-border": { scale: "gold", step: 700 },
       },

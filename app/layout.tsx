@@ -3,6 +3,7 @@ import { Montserrat } from "next/font/google";
 import type { ReactElement } from "react";
 
 import { SkipToContent } from "@/components/skip-to-content";
+import { ThemeInitScript } from "@/components/theme-init-script";
 import { SEEDS } from "@/scripts/tokens/scale-config";
 
 import "./globals.css";
@@ -28,13 +29,14 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: SEEDS.navy,
-  colorScheme: "light",
+  colorScheme: "light dark",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">): ReactElement {
   return (
     <html lang="es" className={montserrat.variable}>
       <body className="bg-background font-sans font-medium text-foreground">
+        <ThemeInitScript />
         <SkipToContent />
         {children}
       </body>

@@ -53,7 +53,7 @@ Phone, WhatsApp, and email live in **one** place: `lib/contact.ts`, fed by `NEXT
 
 ## Theming
 
-Light is the live theme. Dark maps the same role tokens to other scale steps under `[data-theme="dark"]` in `app/styles/tokens.css`, but the site does not follow OS preference. Content imagery must be background-free so it can sit on either palette.
+Light is the default. The header toggle stores a choice under `tesoro-theme`; with no choice, the OS preference applies. Dark mode uses navy for the page and cards, not a neutral near-black (`app/styles/tokens.css`). Content imagery must be background-free so it can sit on either palette.
 
 ## Design
 
