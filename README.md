@@ -43,9 +43,7 @@ Route groups (`(marketing)`, `(shop)`) organize layouts without changing URLs. A
 
 ## Brand assets
 
-Import from `@/assets/brand`. Pass `asset.image` to `next/image` so Next.js can compress to WebP and set width/height.
-
-Logos with a baked background (`logo-gold.jpg`, `logo-navy.jpg`) must **not** sit on theme-dependent surfaces (hero, header). Use the `*-no-background.png` variants there. Baked-background files are for surfaces we fully control (for example Open Graph images).
+Import the transparent marks from `@/assets/brand` and pass `asset.src` to `next/image`.
 
 ## Contact
 

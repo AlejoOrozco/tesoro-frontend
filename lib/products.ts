@@ -163,15 +163,6 @@ function getProductsByIds(ids: readonly string[]): readonly Product[] {
   });
 }
 
-/** Five SKUs sit ahead of the Wompi card in the hero row. */
-export const HERO_PRODUCTS: readonly Product[] = getProductsByIds([
-  "power-bank-5000",
-  "earbuds-tws",
-  "charger-20w",
-  "cable-usbc",
-  "watch-smart",
-]);
-
 /** Landing rails — four sections, six products per page, four pages. */
 export const PRODUCT_COLLECTIONS: readonly ProductCollection[] = [
   {

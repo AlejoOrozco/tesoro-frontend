@@ -2,36 +2,35 @@ import Image from "next/image";
 import type { ReactElement } from "react";
 
 import { productAssets } from "@/assets/products";
+import { DiscountDiamond } from "@/components/discount-diamond";
 import { ProductPrice } from "@/components/product-price";
+import { discountPercent } from "@/lib/money";
 import type { Product } from "@/lib/products";
-
-const ARRIVAL_LABEL = "Llega en 3 días";
 
 export function ProductSummary({
   product,
-  imageAlt,
   imageSizes,
   imagePaddingClass,
 }: {
   readonly product: Product;
-  readonly imageAlt: string;
   readonly imageSizes: string;
   readonly imagePaddingClass: string;
 }): ReactElement {
   const image = productAssets[product.imageId];
+  const percent = discountPercent(product.listPrice, product.price);
   return (
     <>
-      <div className="flex aspect-square items-center justify-center overflow-hidden rounded-sm bg-background">
+      <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-sm bg-background">
         <Image
-          src={image}
-          alt={imageAlt}
+          src={image.src}
+          alt={image.alt}
           sizes={imageSizes}
           className={`h-full w-full object-contain ${imagePaddingClass}`}
         />
+        <DiscountDiamond percent={percent} />
       </div>
-      <h3 className="line-clamp-2 text-xs font-medium">{product.name}</h3>
+      <h3 className="card-title line-clamp-2 text-xs font-medium">{product.name}</h3>
       <ProductPrice listPrice={product.listPrice} price={product.price} />
-      <p className="text-xs font-bold text-success-400">{ARRIVAL_LABEL}</p>
     </>
   );
 }

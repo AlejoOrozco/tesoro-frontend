@@ -1,7 +1,10 @@
-import type { StaticImageData } from "next/image";
+import type { DescribedImage } from "@/assets/described-image";
 
 import zazWhiteLogo from "./credits/zaz-white-logo.png";
 
 export const creditAssets = {
-  zaz: zazWhiteLogo,
-} as const satisfies Record<"zaz", StaticImageData>;
+  zaz: {
+    src: zazWhiteLogo,
+    alt: "Logotipo de Zaz",
+  },
+} as const satisfies Record<"zaz", DescribedImage>;

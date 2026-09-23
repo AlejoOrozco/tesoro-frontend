@@ -3,8 +3,8 @@ import type { ComponentPropsWithoutRef, ReactElement } from "react";
 
 export type ButtonVariant = "primary" | "secondary";
 
-/** sm = compact tiles; md = 44px minimum; lg = 56px primary CTAs (docs/design/forms.md). */
-export type ButtonSize = "sm" | "md" | "lg";
+/** sm = compact tiles; md = 44px minimum (docs/design/forms.md). */
+export type ButtonSize = "sm" | "md";
 
 interface ButtonStyleProps {
   readonly variant?: ButtonVariant;
@@ -25,7 +25,6 @@ const VARIANT_CLASSES: Record<ButtonVariant, string> = {
 const SIZE_CLASSES: Record<ButtonSize, string> = {
   sm: "h-9 px-3 text-xs",
   md: "h-11 px-4 text-sm",
-  lg: "h-14 px-6 text-base",
 };
 
 /** Exported for plain `<a>` CTAs (tel/mailto/WhatsApp) that can't use next/link. */

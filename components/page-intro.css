@@ -1,0 +1,119 @@
+/*
+ * Refresh intro. Beats match a ~2.1s landing sequence:
+ * mark fades in, fades out, the near-black veil holds, then veil and page crossfade.
+ * 0–38% fade in, 38–42% hold, 42–56% fade out, 56–72% veil hold, 72–100% crossfade.
+ */
+:root {
+  --page-intro-duration: 2.1s;
+  --page-intro-ease-in-out: cubic-bezier(0.45, 0.05, 0.55, 1);
+  --page-intro-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.page-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--navy-950);
+  animation-name: page-intro-veil, page-intro-release;
+  animation-duration: var(--page-intro-duration);
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.page-intro-mark {
+  width: 11rem;
+  height: auto;
+  opacity: 0;
+  animation-name: page-intro-mark;
+  animation-duration: var(--page-intro-duration);
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.page-intro-reveal {
+  opacity: 0;
+  animation-name: page-intro-reveal;
+  animation-duration: var(--page-intro-duration);
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes page-intro-mark {
+  0% {
+    opacity: 0;
+    animation-timing-function: var(--page-intro-ease-in-out);
+  }
+
+  38% {
+    opacity: 1;
+    animation-timing-function: linear;
+  }
+
+  42% {
+    opacity: 1;
+    animation-timing-function: var(--page-intro-ease-out);
+  }
+
+  56%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes page-intro-veil {
+  0% {
+    opacity: 1;
+    animation-timing-function: linear;
+  }
+
+  72% {
+    opacity: 1;
+    animation-timing-function: var(--page-intro-ease-out);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes page-intro-reveal {
+  0% {
+    opacity: 0;
+    animation-timing-function: linear;
+  }
+
+  72% {
+    opacity: 0;
+    animation-timing-function: var(--page-intro-ease-out);
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes page-intro-release {
+  0%,
+  99% {
+    pointer-events: auto;
+  }
+
+  100% {
+    pointer-events: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-intro {
+    display: none;
+  }
+
+  .page-intro-mark,
+  .page-intro-reveal {
+    animation: none;
+    opacity: 1;
+  }
+}

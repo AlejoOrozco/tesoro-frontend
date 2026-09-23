@@ -2,11 +2,14 @@ import type { Metadata, Viewport } from "next";
 import { Montserrat } from "next/font/google";
 import type { ReactElement } from "react";
 
+import { PageIntro } from "@/components/page-intro";
 import { SkipToContent } from "@/components/skip-to-content";
 import { ThemeInitScript } from "@/components/theme-init-script";
+import { ThemeProvider } from "@/components/theme-provider";
 import { SEEDS } from "@/scripts/tokens/scale-config";
 
 import "./globals.css";
+import "@/components/page-intro.css";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -33,12 +36,17 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">): ReactElement {
+  // ThemeInitScript may set data-theme on this element before hydration.
   return (
-    <html lang="es" className={montserrat.variable}>
+    <html lang="es" className={montserrat.variable} suppressHydrationWarning>
       <body className="bg-background font-sans font-medium text-foreground">
         <ThemeInitScript />
-        <SkipToContent />
-        {children}
+        <ThemeProvider>
+          <PageIntro>
+            <SkipToContent />
+            {children}
+          </PageIntro>
+        </ThemeProvider>
       </body>
     </html>
   );

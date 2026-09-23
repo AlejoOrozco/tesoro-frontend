@@ -44,8 +44,8 @@ export function FooterBrand(): ReactElement {
     <div className="flex w-fit flex-col items-center gap-4">
       <span className="relative block h-32 w-40 overflow-hidden sm:h-36 sm:w-44">
         <Image
-          src={brandAssets.logoGoldNoBackground}
-          alt="Tesoro Global SAS"
+          src={brandAssets.logoGoldNoBackground.src}
+          alt={brandAssets.logoGoldNoBackground.alt}
           fill
           sizes="176px"
           className="object-contain object-center scale-125"

@@ -20,10 +20,9 @@ export function FooterCredit(): ReactElement {
         className={ZAZ_LINK_CLASSES}
         target="_blank"
         rel="noreferrer"
-        aria-label="Zaz"
       >
         <span className="relative block h-8 w-8">
-          <Image src={creditAssets.zaz} alt="" fill sizes="2rem" className="object-contain" />
+          <Image src={creditAssets.zaz.src} alt={creditAssets.zaz.alt} fill sizes="2rem" className="object-contain" />
         </span>
       </a>
     </p>

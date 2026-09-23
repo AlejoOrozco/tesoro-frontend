@@ -4,7 +4,7 @@ import { SearchIcon } from "@/components/icons";
 
 /**
  * Header search — GET /search. Results are an empty state until the catalog
- * search endpoint exists (same deferral as the newsletter form).
+ * search endpoint exists.
  */
 export function SiteSearch(): ReactElement {
   return (

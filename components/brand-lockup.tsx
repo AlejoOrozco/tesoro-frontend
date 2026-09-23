@@ -17,8 +17,8 @@ export function BrandLockup({ preload = false }: BrandLockupProps): ReactElement
   return (
     <span className="relative block h-16 w-32">
       <Image
-        src={brandAssets.logoGoldNoLabel}
-        alt="Tesoro Global SAS"
+        src={brandAssets.logoGoldNoLabel.src}
+        alt={brandAssets.logoGoldNoLabel.alt}
         fill
         sizes="128px"
         className="object-cover object-center"

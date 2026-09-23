@@ -1,5 +1,7 @@
+import Image from "next/image";
 import type { ReactElement } from "react";
 
+import diamondGold from "@/assets/brand/diamond-gold.png";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { MAIN_CONTENT_ID } from "@/lib/landmarks";
@@ -7,7 +9,9 @@ import { MAIN_CONTENT_ID } from "@/lib/landmarks";
 export default function MarketingLayout({ children }: LayoutProps<"/">): ReactElement {
   return (
     <div className="marketing-shell relative isolate flex min-h-dvh flex-col">
-      <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 bg-background" />
+      <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 bg-background">
+        <Image src={diamondGold} alt="" className="page-diamond" />
+      </div>
       <SiteHeader />
       <main
         id={MAIN_CONTENT_ID}

@@ -1,7 +1,6 @@
 import { Fragment, type ReactElement } from "react";
 
 import { ImportCallout } from "@/components/import-callout";
-import { NewsletterSignup } from "@/components/newsletter-signup";
 import { ProductRail } from "@/components/product-rail";
 import { Section } from "@/components/section";
 import { PRODUCT_COLLECTIONS } from "@/lib/products";
@@ -16,7 +15,6 @@ export function ProductsSection(): ReactElement {
             {collection.id === "power" ? <ImportCallout /> : null}
           </Fragment>
         ))}
-        <NewsletterSignup />
       </div>
     </Section>
   );

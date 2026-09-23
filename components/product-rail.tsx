@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type { ReactElement } from "react";
 
-import { ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
+import { LineChevron } from "@/components/icons";
 import { ProductTile } from "@/components/product-tile";
 import { SOFT_RAIL_CARD_CLASSES } from "@/components/soft-card";
 import { getRailPages, type Product, type ProductCollection } from "@/lib/products";
@@ -25,13 +25,11 @@ function RailArrow({
       aria-label={isPrev ? "Ver productos anteriores" : "Ver más productos"}
       onClick={onClick}
       className={[
-        "absolute top-1/2 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-surface text-foreground shadow-sm ring-1 ring-neutral-200",
-        "transition-transform duration-micro active:scale-[0.97] hover:bg-background",
-        "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
-        isPrev ? "left-0 -translate-x-1/2" : "right-0 translate-x-1/2",
+        "line-arrow inline-flex size-11 items-center justify-center text-foreground",
+        "active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
       ].join(" ")}
     >
-      {isPrev ? <ChevronLeftIcon className="size-5" /> : <ChevronRightIcon className="size-5" />}
+      <LineChevron direction={direction} />
     </button>
   );
 }
@@ -55,11 +53,7 @@ function RailStep({
       onClick={onSelect}
       className="relative flex size-3 items-center justify-center rounded-full transition-transform duration-micro before:absolute before:-inset-2 before:content-[''] active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
     >
-      <span
-        className={
-          isCurrent ? "block size-1.5 rounded-full bg-chrome" : "block size-1.5 rounded-full bg-neutral-300"
-        }
-      />
+      <span className={isCurrent ? "rail-dot is-current" : "rail-dot"} />
     </button>
   );
 }
@@ -123,28 +117,32 @@ export function ProductRail({ collection }: { readonly collection: ProductCollec
   const titleId = `${collection.id}-title`;
 
   return (
-    <article className={`${SOFT_RAIL_CARD_CLASSES} p-4 sm:p-6`}>
-      <h2 id={titleId} className="mb-4 text-base font-bold tracking-tight sm:text-lg">
-        {collection.title}
-      </h2>
-      <div className="relative">
-        <div className="overflow-x-clip touch-pan-y">
-          <div
-            className="flex w-full transition-transform duration-standard motion-reduce:transition-none"
-            style={{ transform: `translateX(-${page * 100}%)` }}
-          >
-            {pages.map((products, pageIndex) => (
-              <RailPage
-                key={pageIndex}
-                products={products}
-                labelledBy={titleId}
-                isActive={pageIndex === page}
-              />
-            ))}
+    <article className={`${SOFT_RAIL_CARD_CLASSES} gold-rim p-4 sm:p-6`}>
+      <div className="mb-4 flex items-center justify-between gap-4">
+        <h2 id={titleId} className="card-title text-base font-bold tracking-tight sm:text-lg">
+          {collection.title}
+        </h2>
+        {pages.length > 1 ? (
+          <div className="flex shrink-0 items-center gap-2">
+            <RailArrow direction="prev" disabled={page === 0} onClick={() => setPage((current) => current - 1)} />
+            <RailArrow direction="next" disabled={page === lastPage} onClick={() => setPage((current) => current + 1)} />
           </div>
+        ) : null}
+      </div>
+      <div className="overflow-x-clip touch-pan-y">
+        <div
+          className="flex w-full transition-transform duration-standard motion-reduce:transition-none"
+          style={{ transform: `translateX(-${page * 100}%)` }}
+        >
+          {pages.map((products, pageIndex) => (
+            <RailPage
+              key={pageIndex}
+              products={products}
+              labelledBy={titleId}
+              isActive={pageIndex === page}
+            />
+          ))}
         </div>
-        <RailArrow direction="prev" disabled={page === 0} onClick={() => setPage((current) => current - 1)} />
-        <RailArrow direction="next" disabled={page === lastPage} onClick={() => setPage((current) => current + 1)} />
       </div>
       <RailStepper page={page} pageCount={pages.length} title={collection.title} onSelect={setPage} />
     </article>
