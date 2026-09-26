@@ -15,7 +15,7 @@ pnpm build
 pnpm tokens   # regenerate design tokens + WCAG contrast gate (fails on a bad pairing)
 ```
 
-Copy `.env.example` to `.env.local` for local public config. Never commit `.env*`.
+Copy `.env.example` to `.env` for local public config. Never commit `.env*`.
 
 ## Folder conventions
 
@@ -47,7 +47,7 @@ Import the transparent marks from `@/assets/brand` and pass `asset.src` to `next
 
 ## Contact
 
-Phone, WhatsApp, and email live in **one** place: `lib/contact.ts`, fed by `NEXT_PUBLIC_*` values in `.env.local`. Do not hardcode them in components.
+Phone, WhatsApp, and email live in **one** place: `lib/contact.ts`, fed by `NEXT_PUBLIC_*` values in `.env`. Do not hardcode them in components.
 
 ## Theming
 

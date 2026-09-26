@@ -11,15 +11,15 @@ export const NAV_ITEMS: readonly NavItem[] = [
   { href: "/contact", label: "Contacto" },
 ];
 
-export type AccountIconId = "account" | "cart";
+export type AccountIconId = "cart";
 
 export interface AccountIconItem extends NavItem {
   readonly id: AccountIconId;
 }
 
+/** Cart stays on this site. Sign-in and the account page live on the app host. */
 export const ACCOUNT_ICON_BY_ID: Record<AccountIconId, AccountIconItem> = {
   cart: { id: "cart", href: "/cart", label: "Carrito" },
-  account: { id: "account", href: "/login", label: "Inicia sesión" },
 };
 
 /** Placeholder catalog groups until category pages land. */

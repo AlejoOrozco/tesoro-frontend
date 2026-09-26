@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import type { Dispatch, ReactElement, SetStateAction } from "react";
 
 import { HeaderChrome } from "@/components/header-chrome";
+import type { SiteOrigins } from "@/lib/origins";
 
 const HIDE_ARM_PX = 96;
 const HIDE_DOWN_PX = 72;
@@ -78,7 +79,7 @@ function useHeaderHideOnScroll(): boolean {
  * Frozen navy glass on every route. Hide-on-scroll is the only scroll state.
  * Frost lives in CSS (`backdrop-blur-[14px]` + chrome mix) so the hue never swaps.
  */
-export function SiteHeader(): ReactElement {
+export function SiteHeader({ origins }: { readonly origins: SiteOrigins }): ReactElement {
   const isHidden = useHeaderHideOnScroll();
 
   return (
@@ -92,7 +93,7 @@ export function SiteHeader(): ReactElement {
         .join(" ")}
     >
       <div className="relative z-10">
-        <HeaderChrome isHidden={isHidden} />
+        <HeaderChrome isHidden={isHidden} origins={origins} />
       </div>
     </header>
   );
