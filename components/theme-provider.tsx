@@ -10,7 +10,7 @@ export function ThemeProvider({ children }: { readonly children: ReactNode }): R
   return (
     <NextThemesProvider
       attribute="data-theme"
-      defaultTheme="light"
+      defaultTheme="dark"
       enableSystem={false}
       disableTransitionOnChange
       storageKey={THEME_STORAGE_KEY}

@@ -7,13 +7,7 @@ import type { ThemeSelection } from "@/components/animate-ui/primitives/effects/
 
 const THEME_MODES = ["light", "dark"] as const satisfies readonly ThemeSelection[];
 
-/** Header control. Wipes from the bottom upward between light and dark. */
+/** Header control. Switches between light and dark with no transition. */
 export function ThemeToggle(): ReactElement {
-  return (
-    <ThemeTogglerButton
-      direction="btt"
-      modes={THEME_MODES}
-      className="header-icon text-chrome-foreground"
-    />
-  );
+  return <ThemeTogglerButton modes={THEME_MODES} className="header-icon text-chrome-foreground" />;
 }

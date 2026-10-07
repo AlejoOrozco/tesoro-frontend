@@ -5,7 +5,8 @@ import { useEffect, useId, useRef, useState } from "react";
 import type { ReactElement, RefObject } from "react";
 
 import { ChevronDownIcon } from "@/components/icons";
-import { CATEGORY_ITEMS, DEPARTMENT_ITEMS } from "@/lib/navigation";
+import type { CatalogCategory } from "@/lib/catalog-types";
+import { CATEGORY_ITEMS, DEPARTMENT_ITEMS, shouldPrefetch, type NavItem } from "@/lib/navigation";
 
 const DEPARTMENT_LINK_CLASSES =
   "header-dept inline-flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-sm text-sm " +
@@ -51,7 +52,24 @@ function useDisclosureDismiss(
   }, [buttonRef, isOpen, rootRef, setIsOpen]);
 }
 
-function HeaderCategories({ isHidden }: { readonly isHidden: boolean }): ReactElement {
+function categoryMenuItems(categories: readonly CatalogCategory[]): readonly NavItem[] {
+  if (categories.length === 0) return CATEGORY_ITEMS;
+  return [
+    { href: "/products", label: "Todos" },
+    ...categories.map((category) => ({
+      href: `/products?category=${encodeURIComponent(category.slug)}`,
+      label: category.name,
+    })),
+  ];
+}
+
+function HeaderCategories({
+  isHidden,
+  categories,
+}: {
+  readonly isHidden: boolean;
+  readonly categories: readonly CatalogCategory[];
+}): ReactElement {
   const menuId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -82,9 +100,14 @@ function HeaderCategories({ isHidden }: { readonly isHidden: boolean }): ReactEl
           id={menuId}
           className="absolute left-0 top-full z-50 min-w-56 rounded-md bg-surface py-1 shadow-sm ring-1 ring-neutral-200"
         >
-          {CATEGORY_ITEMS.map((item) => (
+          {categoryMenuItems(categories).map((item) => (
             <li key={item.href}>
-              <Link href={item.href} className={CATEGORY_LINK_CLASSES} onClick={() => setIsOpen(false)}>
+              <Link
+                href={item.href}
+                prefetch={shouldPrefetch(item.href) ? undefined : false}
+                className={CATEGORY_LINK_CLASSES}
+                onClick={() => setIsOpen(false)}
+              >
                 {item.label}
               </Link>
             </li>
@@ -96,12 +119,24 @@ function HeaderCategories({ isHidden }: { readonly isHidden: boolean }): ReactEl
 }
 
 /** Slim second row under the search: Categorías, then department shortcuts, centered. */
-export function HeaderDepartments({ isHidden = false }: { readonly isHidden?: boolean }): ReactElement {
+export function HeaderDepartments({
+  isHidden = false,
+  categories,
+}: {
+  readonly isHidden?: boolean;
+  readonly categories: readonly CatalogCategory[];
+}): ReactElement {
   return (
     <div className="relative flex min-h-11 items-center justify-center gap-8">
-      <HeaderCategories isHidden={isHidden} />
+      <HeaderCategories isHidden={isHidden} categories={categories} />
       {DEPARTMENT_ITEMS.map((item) => (
-        <Link key={item.href} href={item.href} className={DEPARTMENT_LINK_CLASSES} aria-label={item.ariaLabel}>
+        <Link
+          key={item.href}
+          href={item.href}
+          prefetch={shouldPrefetch(item.href) ? undefined : false}
+          className={DEPARTMENT_LINK_CLASSES}
+          aria-label={item.ariaLabel}
+        >
           {item.label}
         </Link>
       ))}

@@ -7,15 +7,18 @@ import { HeaderAccountIcons } from "@/components/header-account";
 import { HeaderDepartments } from "@/components/header-departments";
 import { HeaderLocation } from "@/components/header-location";
 import { SiteSearch } from "@/components/site-search";
+import type { CatalogCategory } from "@/lib/catalog-types";
 import type { SiteOrigins } from "@/lib/origins";
 
 /** Search stays 42rem; logo and icons inset a little toward it. */
 export function HeaderChrome({
   isHidden,
   origins,
+  categories,
 }: {
   readonly isHidden: boolean;
   readonly origins: SiteOrigins;
+  readonly categories: readonly CatalogCategory[];
 }): ReactElement {
   return (
     <Container className="relative pt-2">
@@ -38,7 +41,7 @@ export function HeaderChrome({
 
         <HeaderLocation />
 
-        <HeaderDepartments isHidden={isHidden} />
+        <HeaderDepartments isHidden={isHidden} categories={categories} />
       </div>
     </Container>
   );

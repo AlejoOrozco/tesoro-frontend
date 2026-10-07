@@ -14,7 +14,7 @@ import type { VisitorSession } from "@/lib/visitor-session";
 function CartLink(): ReactElement {
   const item = ACCOUNT_ICON_BY_ID.cart;
   return (
-    <Link href={item.href} className={HEADER_ICON_BUTTON_CLASSES}>
+    <Link href={item.href} prefetch={false} className={HEADER_ICON_BUTTON_CLASSES}>
       <CartIcon className={HEADER_ICON_GLYPH_CLASSES} />
       {item.label}
     </Link>

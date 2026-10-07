@@ -8,7 +8,7 @@ import { FooterGlobe } from "@/components/footer-globe";
 import { FooterSucursales } from "@/components/footer-sucursales";
 import { FOOTER_HEADING_CLASSES, FOOTER_LINK_CLASSES } from "@/components/footer-styles";
 import { contact, whatsappUrl } from "@/lib/contact";
-import { LEGAL_ITEMS, NAV_ITEMS, type NavItem } from "@/lib/navigation";
+import { LEGAL_ITEMS, NAV_ITEMS, shouldPrefetch, type NavItem } from "@/lib/navigation";
 
 interface ContactChannel {
   readonly href: string;
@@ -46,7 +46,7 @@ function FooterLinkColumn({
       <ul className="mt-2">
         {items.map((item) => (
           <li key={item.href}>
-            <Link href={item.href} className={FOOTER_LINK_CLASSES}>
+            <Link href={item.href} prefetch={shouldPrefetch(item.href) ? undefined : false} className={FOOTER_LINK_CLASSES}>
               {item.label}
             </Link>
           </li>

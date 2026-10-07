@@ -88,18 +88,14 @@ function RailStepper({
 function RailPage({
   products,
   labelledBy,
-  isActive,
 }: {
   readonly products: readonly Product[];
   readonly labelledBy: string;
-  readonly isActive: boolean;
 }): ReactElement {
   return (
     <ul
-      className="grid min-w-full shrink-0 basis-full grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6"
+      className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6"
       aria-labelledby={labelledBy}
-      aria-hidden={!isActive}
-      inert={!isActive}
     >
       {products.map((product, index) => (
         <li key={`${product.id}-${index}`}>
@@ -115,6 +111,7 @@ export function ProductRail({ collection }: { readonly collection: ProductCollec
   const [page, setPage] = useState(0);
   const lastPage = pages.length - 1;
   const titleId = `${collection.id}-title`;
+  const products = pages[page] ?? [];
 
   return (
     <article className={`${SOFT_RAIL_CARD_CLASSES} gold-rim p-4 sm:p-6`}>
@@ -129,21 +126,7 @@ export function ProductRail({ collection }: { readonly collection: ProductCollec
           </div>
         ) : null}
       </div>
-      <div className="overflow-x-clip touch-pan-y">
-        <div
-          className="flex w-full transition-transform duration-standard motion-reduce:transition-none"
-          style={{ transform: `translateX(-${page * 100}%)` }}
-        >
-          {pages.map((products, pageIndex) => (
-            <RailPage
-              key={pageIndex}
-              products={products}
-              labelledBy={titleId}
-              isActive={pageIndex === page}
-            />
-          ))}
-        </div>
-      </div>
+      <RailPage products={products} labelledBy={titleId} />
       <RailStepper page={page} pageCount={pages.length} title={collection.title} onSelect={setPage} />
     </article>
   );

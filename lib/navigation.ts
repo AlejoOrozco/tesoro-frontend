@@ -43,3 +43,12 @@ export const LEGAL_ITEMS: readonly NavItem[] = [
   { href: "/terms", label: "Términos y condiciones" },
   { href: "/privacy", label: "Privacidad y habeas data" },
 ];
+
+const LIVE_EXACT_PATHS = new Set(["/", "/products", "/search"]);
+
+/** Viewport prefetch only for routes that exist. Missing pages would download a 404. */
+export function shouldPrefetch(href: string): boolean {
+  const path = href.split(/[?#]/)[0] ?? "";
+  if (LIVE_EXACT_PATHS.has(path)) return true;
+  return path.startsWith("/products/");
+}

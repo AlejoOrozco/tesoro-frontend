@@ -15,7 +15,7 @@ interface BrandLockupProps {
  */
 export function BrandLockup({ preload = false }: BrandLockupProps): ReactElement {
   return (
-    <span className="relative block h-16 w-32">
+    <span data-brand-lockup="" className="relative block h-16 w-32">
       <Image
         src={brandAssets.logoGoldNoLabel.src}
         alt={brandAssets.logoGoldNoLabel.alt}

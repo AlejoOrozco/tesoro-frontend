@@ -113,6 +113,25 @@ export function TikTokIcon(props: IconProps): ReactElement {
   );
 }
 
+/** Moon — dark theme is on. */
+export function MoonIcon(props: IconProps): ReactElement {
+  return (
+    <svg {...baseProps(props)}>
+      <path d="M20 14.5A7.5 7.5 0 0 1 9.5 4 6.5 6.5 0 1 0 20 14.5Z" />
+    </svg>
+  );
+}
+
+/** Sun — light theme is on. */
+export function SunIcon(props: IconProps): ReactElement {
+  return (
+    <svg {...baseProps(props)}>
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 3v1.5M12 19.5V21M3 12h1.5M19.5 12H21M5.6 5.6l1.1 1.1M17.3 17.3l1.1 1.1M18.4 5.6l-1.1 1.1M6.7 17.3l-1.1 1.1" />
+    </svg>
+  );
+}
+
 /** Map pin — delivery location. */
 export function MapPinIcon(props: IconProps): ReactElement {
   return (

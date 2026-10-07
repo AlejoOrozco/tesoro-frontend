@@ -22,7 +22,7 @@ export function ContactCta({
   const classes = buttonClasses(variant, size);
   if (whatsapp === null) {
     return (
-      <Link href="/contact" className={classes}>
+      <Link href="/contact" prefetch={false} className={classes}>
         {label}
       </Link>
     );

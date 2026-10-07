@@ -1,16 +1,15 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import type { ComponentProps, ReactElement } from "react";
 
 import {
   ThemeToggler,
-  type Direction,
   type Resolved,
   type ThemeSelection,
 } from "@/components/animate-ui/primitives/effects/theme-toggler";
+import { MoonIcon, SunIcon } from "@/components/icons";
 import { cn } from "@/lib/utils";
 
 const BUTTON_CLASSES =
@@ -32,18 +31,16 @@ function getNextTheme(effective: ThemeSelection, modes: readonly ThemeSelection[
 }
 
 function ThemeIcon({ name }: { readonly name: Resolved }): ReactElement {
-  if (name === "dark") return <Moon className="size-6" />;
-  return <Sun className="size-6" />;
+  if (name === "dark") return <MoonIcon className="size-6" />;
+  return <SunIcon className="size-6" />;
 }
 
 type ThemeTogglerButtonProps = ComponentProps<"button"> & {
   readonly modes?: readonly ThemeSelection[];
-  readonly direction?: Direction;
 };
 
 function ThemeTogglerButton({
   modes = ["light", "dark"],
-  direction = "btt",
   onClick,
   className,
   ...props
@@ -53,11 +50,11 @@ function ThemeTogglerButton({
   useEffect(() => {
     setReady(true);
   }, []);
-  const effective: ThemeSelection = isReady && isThemeSelection(theme) ? theme : "light";
-  const resolved: Resolved = isReady && resolvedTheme === "dark" ? "dark" : "light";
+  const effective: ThemeSelection = isReady && isThemeSelection(theme) ? theme : "dark";
+  const resolved: Resolved = isReady && resolvedTheme === "light" ? "light" : "dark";
 
   return (
-    <ThemeToggler theme={effective} resolvedTheme={resolved} setTheme={setTheme} direction={direction}>
+    <ThemeToggler theme={effective} resolvedTheme={resolved} setTheme={setTheme}>
       {({ effective: current, toggleTheme }) => {
         const next = getNextTheme(current, modes);
         return (
