@@ -22,9 +22,16 @@ function segmentPhase(slideIndex: number, segmentIndex: number): SegmentPhase {
   return "todo";
 }
 
+function readAnimationName(value: object): string | null {
+  if (!("animationName" in value)) return null;
+  const name = value.animationName;
+  if (typeof name !== "string") return null;
+  return name;
+}
+
 function activeFillFinished(fill: HTMLSpanElement): boolean {
   return fill.getAnimations().some(
-    (animation) => animation.animationName === "hero-segment-fill" && animation.playState === "finished",
+    (animation) => readAnimationName(animation) === "hero-segment-fill" && animation.playState === "finished",
   );
 }
 
