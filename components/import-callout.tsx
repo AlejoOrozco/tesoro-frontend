@@ -1,15 +1,17 @@
 import type { ReactElement } from "react";
 
 import { ContactCta } from "@/components/contact-cta";
+import { ImportRoute } from "@/components/import-route";
 import { PromoStrip } from "@/components/promo-strip";
 
 const IMPORT_WHATSAPP_MESSAGE = "Hola, quiero cotizar una importación.";
 
-/** Gold import strip — same type scale as the collection rails, no icon. */
+/** Gold import strip — same type scale as the collection rails, with a small route loop. */
 export function ImportCallout(): ReactElement {
   return (
     <PromoStrip
-      className="bg-secondary"
+      className="import-callout"
+      decoration={<ImportRoute />}
       title={
         <>
           ¿No lo encuentras aquí?{" "}
@@ -17,7 +19,7 @@ export function ImportCallout(): ReactElement {
         </>
       }
       description="Servicio de importación personalizado. Conseguimos lo que necesitas al mejor costo."
-      descriptionClassName="text-xs leading-relaxed text-muted"
+      descriptionClassName="text-xs leading-relaxed text-navy-800"
     >
       <ContactCta
         message={IMPORT_WHATSAPP_MESSAGE}

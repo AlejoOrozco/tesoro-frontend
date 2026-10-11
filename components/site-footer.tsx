@@ -4,7 +4,6 @@ import type { ReactElement } from "react";
 import { Container } from "@/components/container";
 import { FooterBrand } from "@/components/footer-brand";
 import { FooterCredit } from "@/components/footer-credit";
-import { FooterGlobe } from "@/components/footer-globe";
 import { FooterSucursales } from "@/components/footer-sucursales";
 import { FOOTER_HEADING_CLASSES, FOOTER_LINK_CLASSES } from "@/components/footer-styles";
 import { contact, whatsappUrl } from "@/lib/contact";
@@ -41,7 +40,7 @@ function FooterLinkColumn({
   readonly items: readonly NavItem[];
 }): ReactElement {
   return (
-    <nav aria-label={title} className="relative z-10">
+    <nav aria-label={title}>
       <h2 className={FOOTER_HEADING_CLASSES}>{title}</h2>
       <ul className="mt-2">
         {items.map((item) => (
@@ -86,18 +85,15 @@ export function SiteFooter(): ReactElement {
     <footer className="footer-float bg-chrome text-chrome-foreground">
       <Container className="pt-16 pb-8 sm:pt-20">
         <div className="grid gap-x-10 gap-y-4 sm:grid-cols-2 lg:grid-cols-4 lg:items-start">
-          <div className="relative z-10 flex flex-col gap-6 lg:translate-y-8">
+          <div className="flex flex-col gap-6">
             <FooterBrand />
             <FooterContact channels={channels} />
           </div>
           <FooterLinkColumn title="Navegación" items={NAV_ITEMS} />
           <FooterLinkColumn title="Legal" items={LEGAL_ITEMS} />
           <FooterSucursales />
-          <div className="relative z-0 flex justify-center sm:col-span-2 lg:col-span-4 lg:-mt-32">
-            <FooterGlobe />
-          </div>
         </div>
-        <div className="relative z-10 mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-neutral-300">© {year} Tesoro Global SAS. Todos los derechos reservados.</p>
           <FooterCredit />
         </div>

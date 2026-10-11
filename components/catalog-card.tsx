@@ -18,7 +18,7 @@ export function CatalogCardView({ product }: { readonly product: CatalogCard }):
       className="flex h-full flex-col gap-2 rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
     >
       <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-sm bg-background">
-        <Image src={productAssets.powerBank.src} alt="" sizes="(min-width: 1024px) 16rem, 40vw" className="h-full w-full object-contain p-4" />
+        <Image src={productAssets.powerBank.src} alt="" sizes="(min-width: 1024px) 12rem, 30vw" className="h-[75%] w-[75%] object-contain" />
         <DiscountDiamond percent={percent} />
       </div>
       <h2 className="card-title line-clamp-2 text-xs font-medium">{product.name}</h2>

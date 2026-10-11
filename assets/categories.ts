@@ -1,31 +1,41 @@
 import type { DescribedImage } from "@/assets/described-image";
 
-import audio from "./categories/audio.png";
-import cases from "./categories/cases.png";
-import phones from "./categories/phones.png";
-import power from "./categories/power.png";
-import wearables from "./categories/wearables.png";
+import headphones from "./categories/audifonos.jpg";
+import powerBanks from "./categories/baterias-portatiles.jpg";
+import cables from "./categories/cables-de-conexion.jpg";
+import phones from "./categories/celulares-y-accesorios.jpg";
+import watches from "./categories/relojes-inteligentes.jpg";
 
-/** One object per hero category. The glass card sits behind these, not over them. */
+export interface CategoryArt extends DescribedImage {
+  /** True when the picture already includes the category name. */
+  readonly labelInArt: boolean;
+}
+
+/** One dark scene per category. The product sits on the right so the name can sit on the left. */
 export const categoryImages = {
   phones: {
     src: phones,
-    alt: "Celular negro con pantalla apagada",
+    alt: "Celulares y accesorios: celular dorado con triple cámara sobre fondo oscuro",
+    labelInArt: true,
   },
   audio: {
-    src: audio,
-    alt: "Auriculares inalámbricos blancos en su estuche abierto",
+    src: headphones,
+    alt: "Audio: audífonos negros de diadema sobre fondo oscuro",
+    labelInArt: true,
   },
   power: {
-    src: power,
-    alt: "Batería portátil negra",
+    src: powerBanks,
+    alt: "Baterías portátiles: power bank negro con carga magnética de 15W sobre fondo oscuro",
+    labelInArt: true,
   },
   cases: {
-    src: cases,
-    alt: "Funda lila para celular",
+    src: cables,
+    alt: "Cables de conexión: cables Lightning, micro-USB y USB-C sobre fondo oscuro",
+    labelInArt: true,
   },
   wearables: {
-    src: wearables,
-    alt: "Reloj inteligente negro con correa de silicona",
+    src: watches,
+    alt: "Relojes inteligentes: dos smartwatches, uno rosa y uno blanco, sobre fondo oscuro",
+    labelInArt: true,
   },
-} as const satisfies Record<"phones" | "audio" | "power" | "cases" | "wearables", DescribedImage>;
+} as const satisfies Record<"phones" | "audio" | "power" | "cases" | "wearables", CategoryArt>;

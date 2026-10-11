@@ -14,24 +14,6 @@ export interface ProductCollection {
   readonly productIds: readonly string[];
 }
 
-/** One rail page is a row of six; the landing always keeps four pages. */
-const RAIL_PAGE_SIZE = 6;
-const RAIL_MAX_PAGES = 4;
-
-function padProductIds(ids: readonly string[], length: number): readonly string[] {
-  if (ids.length === 0) return ids;
-  const padded: string[] = [];
-  while (padded.length < length) padded.push(...ids);
-  return padded.slice(0, length);
-}
-
-export function getRailPages(ids: readonly string[]): readonly (readonly Product[])[] {
-  const products = getProductsByIds(padProductIds(ids, RAIL_PAGE_SIZE * RAIL_MAX_PAGES));
-  return Array.from({ length: RAIL_MAX_PAGES }, (_, index) =>
-    products.slice(index * RAIL_PAGE_SIZE, (index + 1) * RAIL_PAGE_SIZE),
-  );
-}
-
 /**
  * Landing mock catalog — names and prices are placeholders for the client
  * review. Real SKUs replace this array when inventory lands.
@@ -153,7 +135,7 @@ const PRODUCTS: readonly Product[] = [
 
 const PRODUCTS_BY_ID = new Map(PRODUCTS.map((product) => [product.id, product]));
 
-function getProductsByIds(ids: readonly string[]): readonly Product[] {
+export function getCollectionProducts(ids: readonly string[]): readonly Product[] {
   return ids.map((id) => {
     const product = PRODUCTS_BY_ID.get(id);
     if (product === undefined) {
@@ -163,7 +145,7 @@ function getProductsByIds(ids: readonly string[]): readonly Product[] {
   });
 }
 
-/** Landing rails — four sections, six products per page, four pages. */
+/** Landing rails. Each section scrolls sideways through its products. */
 export const PRODUCT_COLLECTIONS: readonly ProductCollection[] = [
   {
     id: "offers",
@@ -171,15 +153,15 @@ export const PRODUCT_COLLECTIONS: readonly ProductCollection[] = [
     productIds: [
       "power-bank-5000",
       "earbuds-tws",
+      "watch-smart",
+      "case-magsafe",
+      "power-bank-10000",
+      "earbuds-anc",
       "charger-20w",
       "cable-usbc",
-      "watch-smart",
-      "earbuds-anc",
       "charger-30w",
       "cable-lightning",
-      "power-bank-10000",
       "charger-car",
-      "case-magsafe",
       "glass-9h",
     ],
   },

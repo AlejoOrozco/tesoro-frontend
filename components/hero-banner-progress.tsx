@@ -22,6 +22,12 @@ function segmentPhase(slideIndex: number, segmentIndex: number): SegmentPhase {
   return "todo";
 }
 
+function activeFillFinished(fill: HTMLSpanElement): boolean {
+  return fill.getAnimations().some(
+    (animation) => animation.animationName === "hero-segment-fill" && animation.playState === "finished",
+  );
+}
+
 function SegmentFill({
   phase,
   durationMs,
@@ -33,27 +39,27 @@ function SegmentFill({
   readonly isPaused: boolean;
   readonly onElapsed: () => void;
 }): ReactElement {
-  const armedAt = useRef<number | null>(null);
+  const fillRef = useRef<HTMLSpanElement>(null);
+  const onElapsedRef = useRef(onElapsed);
+  onElapsedRef.current = onElapsed;
 
   useLayoutEffect(() => {
-    if (phase !== "active") {
-      armedAt.current = null;
-      return;
-    }
-    armedAt.current = performance.now();
+    if (phase !== "active") return;
+    const fill = fillRef.current;
+    if (!fill || !activeFillFinished(fill)) return;
+    onElapsedRef.current();
   }, [phase, durationMs]);
 
   function handleEnd(event: AnimationEvent<HTMLSpanElement>): void {
     if (event.target !== event.currentTarget) return;
     if (event.animationName !== "hero-segment-fill") return;
-    const start = armedAt.current;
-    if (start === null) return;
-    if (performance.now() - start < durationMs - COMPLETION_SLACK_MS) return;
+    if (event.elapsedTime * 1000 < durationMs - COMPLETION_SLACK_MS) return;
     onElapsed();
   }
 
   return (
     <span
+      ref={fillRef}
       className={["hero-segment-fill", `is-${phase}`, isPaused && phase === "active" ? "is-paused" : ""]
         .filter(Boolean)
         .join(" ")}

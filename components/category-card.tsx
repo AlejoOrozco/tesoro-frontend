@@ -3,27 +3,41 @@ import Link from "next/link";
 import type { ReactElement } from "react";
 
 import type { DescribedImage } from "@/assets/described-image";
-import { SOFT_RAIL_CARD_CLASSES } from "@/components/soft-card";
 import { shouldPrefetch, type NavItem } from "@/lib/navigation";
 
-/** Frosted category tile. The object stays sharp on top of a plain backdrop blur. */
+/** Full-bleed photo. The product sits on the right and the name sits on the dark left. */
 export function CategoryCard({
   item,
   image,
+  labelInArt = false,
 }: {
   readonly item: NavItem;
   readonly image: DescribedImage;
+  /** The artwork already paints the category name, so the overlay label stays for screen readers only. */
+  readonly labelInArt?: boolean;
 }): ReactElement {
   return (
     <Link
       href={item.href}
       prefetch={shouldPrefetch(item.href) ? undefined : false}
-      className="mx-auto flex w-fit max-w-full flex-col items-center gap-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      className="group gold-rim relative block aspect-[7/4] w-full overflow-hidden bg-black rounded-lg transition-transform duration-micro active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
     >
-      <span className={`${SOFT_RAIL_CARD_CLASSES} gold-rim inline-flex max-w-full items-center justify-center px-3 py-2`}>
-        <Image src={image.src} alt={image.alt} sizes="128px" className="category-object h-32 w-auto max-w-full object-contain" />
+      <Image
+        src={image.src}
+        alt={image.alt}
+        fill
+        sizes="(min-width: 1024px) 15rem, (min-width: 640px) 42vw, 90vw"
+        className="zoom-photo object-contain object-center"
+      />
+      <span
+        className={
+          labelInArt
+            ? "sr-only"
+            : "pointer-events-none absolute top-2 left-2 line-clamp-2 max-w-[48%] text-left text-xs font-medium leading-4 text-white drop-shadow-[0_2px_8px_rgb(0_0_0/0.85)]"
+        }
+      >
+        {item.label}
       </span>
-      <span className="card-title line-clamp-2 w-0 min-w-full text-center text-xs font-medium">{item.label}</span>
     </Link>
   );
 }

@@ -1,13 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-import type { ReactElement, TransitionEvent } from "react";
+import { useRef, useState } from "react";
+import type { ReactElement, ReactNode, TransitionEvent } from "react";
 
 import { HERO_SLIDES, type HeroSlide } from "@/assets/hero";
-import { Container } from "@/components/container";
 import { HeroBannerProgress } from "@/components/hero-banner-progress";
 import { LineChevron } from "@/components/icons";
+import { useSlideFade } from "@/components/use-slide-fade";
 
 const ROTATE_MS = 5000;
 const SLIDE_COUNT = HERO_SLIDES.length;
@@ -97,8 +97,9 @@ function HeroFrame({
         alt={isActive ? slide.alt : ""}
         fill
         preload={preload}
-        sizes="(min-width: 1344px) 80rem, calc(100vw - 2rem)"
-        className="object-contain object-center"
+        quality={90}
+        sizes="100vw"
+        className="object-cover object-center"
       />
     </div>
   );
@@ -130,11 +131,13 @@ function HeroTrack({
   );
 }
 
-export function HeroBanner(): ReactElement {
+export function HeroBanner({ children }: { readonly children: ReactNode }): ReactElement {
   const [visual, setVisual] = useState(FIRST_VISUAL);
   const [animate, setAnimate] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
+  const regionRef = useRef<HTMLDivElement>(null);
   const index = slideIndexFromVisual(visual);
+  useSlideFade(regionRef, index);
 
   function moveTo(nextVisual: number): void {
     if (prefersReducedMotion()) {
@@ -178,34 +181,42 @@ export function HeroBanner(): ReactElement {
   }
 
   return (
-    <div role="region" aria-roledescription="carrusel" aria-label="Promociones" className="relative w-full">
+    <>
       <div
-        className="relative"
-        onFocusCapture={() => setIsPaused(true)}
-        onBlurCapture={(event) => {
-          const nextFocus = event.relatedTarget;
-          if (nextFocus instanceof Node && event.currentTarget.contains(nextFocus)) return;
-          setIsPaused(false);
-        }}
+        ref={regionRef}
+        role="region"
+        aria-roledescription="carrusel"
+        aria-label="Promociones"
+        className="relative w-full bg-chrome pt-[var(--header-offset)]"
       >
-        <Container>
+        <div
+          className="relative"
+          onFocusCapture={() => setIsPaused(true)}
+          onBlurCapture={(event) => {
+            const nextFocus = event.relatedTarget;
+            if (nextFocus instanceof Node && event.currentTarget.contains(nextFocus)) return;
+            setIsPaused(false);
+          }}
+        >
           <HeroTrack visual={visual} animate={animate} onSettle={settleTrack} />
-        </Container>
-        <BannerArrow direction="prev" onClick={() => goBy(-1)} />
-        <BannerArrow direction="next" onClick={() => goBy(1)} />
-      </div>
-      <Container>
-        <div className="flex justify-center pt-2">
-          <HeroBannerProgress
-            index={index}
-            labels={SLIDE_LABELS}
-            durationMs={ROTATE_MS}
-            isPaused={isPaused}
-            onElapsed={handleElapsed}
-            onSelect={goToIndex}
-          />
+          <BannerArrow direction="prev" onClick={() => goBy(-1)} />
+          <BannerArrow direction="next" onClick={() => goBy(1)} />
+          <div className="absolute inset-x-0 bottom-4 z-20 flex justify-center">
+            <HeroBannerProgress
+              index={index}
+              labels={SLIDE_LABELS}
+              durationMs={ROTATE_MS}
+              isPaused={isPaused}
+              onElapsed={handleElapsed}
+              onSelect={goToIndex}
+            />
+          </div>
         </div>
-      </Container>
-    </div>
+      </div>
+      <div className="relative">
+        <div aria-hidden="true" className="hero-ending-glow pointer-events-none absolute inset-x-0 -top-px z-0" />
+        <div className="relative z-10 pt-4">{children}</div>
+      </div>
+    </>
   );
 }

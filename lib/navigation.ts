@@ -27,7 +27,7 @@ export const CATEGORY_ITEMS: readonly NavItem[] = [
   { href: "/category/phones", label: "Celulares y accesorios" },
   { href: "/category/audio", label: "Audio" },
   { href: "/category/power", label: "Carga y energía" },
-  { href: "/category/cases", label: "Fundas y protección" },
+  { href: "/category/cases", label: "Cables de conexión" },
   { href: "/category/wearables", label: "Relojes inteligentes" },
 ];
 

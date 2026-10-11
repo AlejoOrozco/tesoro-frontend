@@ -7,12 +7,14 @@ export function PromoStrip({
   description,
   descriptionClassName,
   children,
+  decoration,
 }: {
   readonly className: string;
   readonly title: ReactNode;
   readonly description: string;
   readonly descriptionClassName: string;
   readonly children: ReactNode;
+  readonly decoration?: ReactNode;
 }): ReactElement {
   return (
     <aside
@@ -21,11 +23,12 @@ export function PromoStrip({
         className,
       ].join(" ")}
     >
-      <div className="flex min-w-0 flex-col gap-1">
+      {decoration}
+      <div className="relative z-[1] flex min-w-0 flex-col gap-1">
         <p className="text-base font-bold tracking-tight sm:text-lg">{title}</p>
         <p className={descriptionClassName}>{description}</p>
       </div>
-      <div className="w-full shrink-0 sm:w-auto sm:self-center">{children}</div>
+      <div className="relative z-[1] w-full shrink-0 sm:w-auto sm:self-center">{children}</div>
     </aside>
   );
 }
